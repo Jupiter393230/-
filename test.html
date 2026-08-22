@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国立両生類研究所｜両生類音声識別・生態鑑定能力試験</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+
+        :root {
+            --jari-deep: #13281f;
+            --jari-base: #1f3d2f;
+            --jari-accent: #32634b;
+            --jari-gold: #cfa85d;
+            --jari-gold-light: #f5edd8;
+            --jari-bg: #f7f3e8;
+            --text-main: #1a221e;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background-color: var(--jari-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(207, 168, 93, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(50, 99, 75, 0.06) 0%, transparent 20%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-main);
+            padding: 20px 10px;
+            box-sizing: border-box;
+        }
+
+        .institute-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(19, 40, 31, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+            max-width: 480px;
+            width: 100%;
+            border: 1px solid rgba(207, 168, 93, 0.35);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--jari-base);
+            text-align: center;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        .institution-header {
+            background: var(--jari-deep);
+            color: #fff;
+            padding: 18px 20px;
+            border-bottom: 3px solid var(--jari-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .institute-symbol {
+            width: 44px;
+            height: 44px;
+            background: radial-gradient(circle, #2d503f 0%, #13281f 100%);
+            border: 2px solid var(--jari-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4), inset 0 0 4px rgba(207, 168, 93, 0.3);
+            flex-shrink: 0;
+        }
+
+        .title-group h1 {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.05rem;
+            margin: 0;
+            letter-spacing: 0.1em;
+            color: #ffffff;
+            font-weight: 800;
+        }
+
+        .title-group p {
+            margin: 3px 0 0 0;
+            font-size: 0.62rem;
+            letter-spacing: 0.08em;
+            color: var(--jari-gold);
+            font-weight: 700;
+        }
+
+        .admin-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(207, 168, 93, 0.5);
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            color: var(--jari-gold-light);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            font-weight: 700;
+        }
+
+        .admin-toggle-btn:hover {
+            background: var(--jari-gold);
+            color: var(--jari-deep);
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        #name-screen {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        #name-screen h2 {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.15rem;
+            color: var(--jari-deep);
+            margin-bottom: 10px;
+        }
+
+        #name-screen p {
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .name-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1.5px solid #cfd8d3;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 16px;
+            text-align: center;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: var(--jari-accent);
+        }
+
+        .start-exam-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            transition: background 0.2s;
+        }
+
+        .start-exam-btn:hover {
+            background: var(--jari-base);
+        }
+
+        .exam-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .exam-number {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            border-left: 4px solid var(--jari-gold);
+            padding-left: 10px;
+        }
+
+        .score-counter {
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: var(--jari-accent);
+            background: rgba(50, 99, 75, 0.08);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e8ece9;
+            height: 6px;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--jari-accent), var(--jari-gold));
+            transition: width 0.4s ease;
+        }
+
+        .stage-box {
+            width: 100%;
+            height: 210px;
+            background: #eef3f0;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 18px;
+            border: 2px solid #d1dcd5;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .quiz-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sound-btn {
+            background: linear-gradient(135deg, var(--jari-base), var(--jari-deep));
+            color: var(--jari-gold-light);
+            border: 2px solid var(--jari-gold);
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(19, 40, 31, 0.25);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+        }
+
+        .sound-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(19, 40, 31, 0.35);
+        }
+
+        h2.question-text {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin: 0 0 14px 0;
+            line-height: 1.5;
+            color: var(--text-main);
+            min-height: 2.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hint-accordion {
+            margin-bottom: 16px;
+            border: 1px solid #dcd7ca;
+            border-radius: 8px;
+            background-color: var(--jari-gold-light);
+            overflow: hidden;
+        }
+
+        .hint-toggle-btn {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #7a6029;
+            cursor: pointer;
+            text-align: center;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hint-content {
+            display: none;
+            padding: 10px 14px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #4a3e23;
+            border-top: 1px dashed #d6cca8;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border: 1.5px solid #cfd8d3;
+            background: #fff;
+            color: var(--text-main);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            box-sizing: border-box;
+            transition: all 0.15s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--jari-accent);
+            background: rgba(50, 99, 75, 0.04);
+            transform: translateX(2px);
+        }
+
+        .correct {
+            background-color: #e8f5e9 !important;
+            border-color: #2e7d32 !important;
+            color: #1b5e20 !important;
+            font-weight: 900;
+        }
+
+        .wrong {
+            background-color: #ffebee !important;
+            border-color: #c62828 !important;
+            color: #b71c1c !important;
+        }
+
+        .explanation-box {
+            margin-top: 14px;
+            padding: 12px 16px;
+            background-color: #f0f7f3;
+            border-left: 4px solid var(--jari-accent);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: left;
+            line-height: 1.6;
+            display: none;
+            color: #234031;
+        }
+
+        .next-btn {
+            margin-top: 16px;
+            padding: 12px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: none;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            transition: background-color 0.2s;
+        }
+
+        .next-btn:hover { background: var(--jari-base); }
+
+        .result-screen { display: none; text-align: center; }
+        .result-certificate {
+            border: 2px double var(--jari-gold);
+            padding: 20px;
+            border-radius: 10px;
+            background: #faf8f5;
+            margin-bottom: 20px;
+        }
+        .cert-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.2rem;
+            color: var(--jari-deep);
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+        .score-display {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--jari-gold);
+            margin: 10px 0;
+        }
+        .restart-btn {
+            padding: 12px 28px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 28, 22, 0.7);
+            backdrop-filter: blur(2px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            max-width: 420px;
+            width: 88%;
+            color: var(--text-main);
+            text-align: left;
+            border: 2px solid var(--jari-gold);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+            color: var(--jari-deep);
+            font-size: 1.05rem;
+            font-family: 'Shippori Mincho', serif;
+            border-bottom: 2px solid var(--jari-gold-light);
+            padding-bottom: 8px;
+        }
+
+        .file-input-group {
+            margin: 10px 0;
+            font-size: 0.8rem;
+            border-bottom: 1px dashed #e0e0e0;
+            padding-bottom: 8px;
+        }
+
+        .file-input-group input[type="file"] {
+            margin-top: 4px;
+            display: block;
+            width: 100%;
+            font-size: 0.75rem;
+        }
+
+        .close-modal-btn {
+            margin-top: 16px;
+            width: 100%;
+            padding: 10px;
+            background: var(--jari-deep);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+<div class="institute-card">
+    <div class="institution-header">
+        <div class="logo-area">
+            <div class="institute-symbol">
+                <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" stroke="#cfa85d" stroke-width="5" fill="none"/>
+                    <circle cx="33" cy="35" r="12" stroke="#cfa85d" stroke-width="6" fill="none"/>
+                    <circle cx="67" cy="35" r="12" stroke="#cfa85d" stroke-width="6" fill="none"/>
+                    <circle cx="33" cy="35" r="4" fill="#cfa85d"/>
+                    <circle cx="67" cy="35" r="4" fill="#cfa85d"/>
+                    <path d="M20 48 C 20 78, 80 78, 80 48" stroke="#cfa85d" stroke-width="7" stroke-linecap="round" fill="none"/>
+                    <path d="M30 68 L 50 80 L 70 68" stroke="#cfa85d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+            </div>
+            <div class="title-group">
+                <h1>国立両生類研究所</h1>
+                <p>JAPAN AMPHIBIAN RESEARCH INSTITUTE</p>
+            </div>
+        </div>
+        <button class="admin-toggle-btn" onclick="openAdminModal()">⚙️ 管理者用</button>
+    </div>
+
+    <div class="card-body">
+        <div id="name-screen">
+            <h2>受験者情報入力</h2>
+            <p>両生類音声識別・生態鑑定能力試験を開始する前に、あなたのお名前を入力してください。</p>
+            <input type="text" id="examinee-name" class="name-input" placeholder="例：山田 太郎">
+            <button class="start-exam-btn" onclick="startExam()">試験を開始する ➔</button>
+        </div>
+
+        <div id="quiz-screen" style="display: none;">
+            <div class="exam-status">
+                <span class="exam-number" id="question-number">第1問</span>
+                <span class="score-counter" id="score-count">適性スコア: 0</span>
+            </div>
+            
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div class="stage-box" id="stage-box"></div>
+
+            <h2 class="question-text" id="question">設問を読み込み中...</h2>
+
+            <div class="hint-accordion">
+                <button class="hint-toggle-btn" onclick="toggleHint()">🔍 ヒントを閲覧する（折りたたみ） 🔽</button>
+                <div class="hint-content" id="hint-content"></div>
+            </div>
+
+            <div id="options">
+                <button class="option-btn" onclick="selectAnswer(0)"></button>
+                <button class="option-btn" onclick="selectAnswer(1)"></button>
+                <button class="option-btn" onclick="selectAnswer(2)"></button>
+                <button class="option-btn" onclick="selectAnswer(3)"></button>
+            </div>
+
+            <div id="explanation" class="explanation-box"></div>
+
+            <button class="next-btn" id="next-btn" onclick="nextQuestion()">次の問題へ進む ➔</button>
+        </div>
+
+        <div id="result-screen" class="result-screen">
+            <div class="result-certificate">
+                <div class="cert-title" id="cert-user-title">能力鑑定結果発表</div>
+                <p style="font-size: 0.8rem; color: #666; margin-bottom: 8px;">合格基準：全問正解（15/15）必須</p>
+                <div class="score-display" id="final-score">0 / 15</div>
+                <p id="result-message" style="font-size: 0.85rem; font-weight: 700; color: var(--jari-deep); line-height: 1.6;"></p>
+                <p id="sheet-status" style="font-size: 0.75rem; color: #555; margin-top: 10px;"></p>
+            </div>
+            <button class="restart-btn" onclick="restartQuiz()">再試験を受験する 🔄</button>
+        </div>
+    </div>
+</div>
+
+<div class="footer-copyright">
+    &copy; Japan Amphibian Research Institute. All Rights Reserved.
+</div>
+
+<div class="modal-overlay" id="admin-modal">
+    <div class="modal-content">
+        <h3>⚙️ 各設問の素材データ設定</h3>
+        <p style="font-size: 0.75rem; color: #666; margin-bottom: 10px;">全15問の個別ファイル（画像/音声）をそれぞれ差し替え可能です。</p>
+        
+        <div id="admin-file-list"></div>
+
+        <button class="close-modal-btn" onclick="closeAdminModal()">設定を確定して戻る</button>
+    </div>
+</div>
+
+<script>
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const SETTING_PASSWORD = "393230";
+    
+    const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx5RMbHIZOzQyw_fG-hkBseYKMs9WuZ63Zr7nGokzKWLGclHOcjxW3Sjoe0-UNi0V3j/exec";
+
+    let examineeName = "";
+    let questionDetails = [];
+
+    // 有名な日本のカエルプールの定義
+    const famousJapaneseFrogs = [
+        "シュレーゲルアオガエル",
+        "ニホンアマガエル",
+        "モリアオガエル",
+        "カジカガエル",
+        "トノサマガエル",
+        "トウキョウダルマガエル",
+        "ニホンヒキガエル",
+        "ツチガエル",
+        "ニホンアカガエル",
+        "ヤマアカガエル",
+        "ヌマガエル",
+        "ウシガエル"
+    ];
+
+    function playSyntheticSound(type) {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const now = audioCtx.currentTime;
+        if (type === 'amagaeru') {
+            for(let i=0; i<4; i++) {
+                let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(650, now + i*0.1);
+                osc.frequency.exponentialRampToValueAtTime(320, now + i*0.1 + 0.07);
+                gain.gain.setValueAtTime(0.3, now + i*0.1); gain.gain.exponentialRampToValueAtTime(0.01, now + i*0.1 + 0.07);
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.start(now + i*0.1); osc.stop(now + i*0.1 + 0.07);
+            }
+        } else if (type === 'ushigaeru') {
+            let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.setValueAtTime(110, now);
+            osc.frequency.exponentialRampToValueAtTime(80, now + 0.4);
+            gain.gain.setValueAtTime(0.4, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+            osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now); osc.stop(now + 0.5);
+        } else if (type === 'kajika') {
+            for(let i=0; i<6; i++) {
+                let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+                osc.type = 'sine'; osc.frequency.setValueAtTime(1200 + i*150, now + i*0.06);
+                gain.gain.setValueAtTime(0.15, now + i*0.06); gain.gain.exponentialRampToValueAtTime(0.01, now + i*0.06 + 0.05);
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now + i*0.06); osc.stop(now + i*0.06 + 0.05);
+            }
+        } else if (type === 'kajika_sound') {
+            for(let i=0; i<5; i++) {
+                let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(900 + i*120, now + i*0.08);
+                gain.gain.setValueAtTime(0.2, now + i*0.08); gain.gain.exponentialRampToValueAtTime(0.01, now + i*0.08 + 0.06);
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now + i*0.08); osc.stop(now + i*0.08 + 0.06);
+            }
+        } else if (type === 'minmin_frog') {
+            let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.setValueAtTime(500, now);
+            osc.frequency.linearRampToValueAtTime(700, now + 0.2);
+            gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+            osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now); osc.stop(now + 0.3);
+        } else if (type === 'SE_correct') {
+            [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(freq, now + idx*0.08);
+                gain.gain.setValueAtTime(0.2, now + idx*0.08); gain.gain.exponentialRampToValueAtTime(0.01, now + idx*0.08 + 0.2);
+                osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now + idx*0.08); osc.stop(now + idx*0.08 + 0.2);
+            });
+        } else if (type === 'SE_wrong') {
+            let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.setValueAtTime(140, now);
+            gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.3);
+            osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now); osc.stop(now+0.3);
+        }
+    }
+
+    const quizData = [
+        // 【画像クイズ 5問】
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="28" cy="28" r="14" fill="#32634b" stroke="#13281f" stroke-width="3"/><circle cx="72" cy="28" r="14" fill="#32634b" stroke="#13281f" stroke-width="3"/><ellipse cx="50" cy="58" rx="38" ry="28" fill="#32634b" stroke="#13281f" stroke-width="3"/></svg>`,
+            question: "【画像第1問】樹上性で、葉の裏などに隠れる緑色の体色と白いラインを持つこのカエルの名前は？",
+            hint: "水田周辺の低木で見られ、名前に「アオガエル」とつきますがアオガエル科ではなくアオガエル属の代表種です。",
+            correctAnswer: "シュレーゲルアオガエル",
+            explanation: "🔬 **正解：シュレーゲルアオガエル**<br>吸盤が発達しており樹上生活に適応しています。"
+        },
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="10" fill="#2d503f" stroke="#cfa85d" stroke-width="3"/></svg>`,
+            question: "【画像第2問】日本固有種で、平地から丘陵地の水田・湿地に広く生息し、後肢が長く俊敏に跳ねる代表的なカエルは？",
+            hint: "背中に明瞭な背中線（あるいは背側線）があり、かつては日本の代表的なトノサマ的存在でした。",
+            correctAnswer: "トノサマガエル",
+            explanation: "🔬 **正解：トノサマガエル**<br>俊敏な跳躍力と警戒心の強さが特徴です。"
+        },
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#4a5d4e" stroke="#cfa85d" stroke-width="3"/></svg>`,
+            question: "【画像第3問】全身がイボに覆われ、毒腺（耳下腺）から強力な分泌液を出す陸生傾向の強い大型種は？",
+            hint: "春先の繁殖期には大きな塊（ヒキガエル合戦）をつくることでも有名です。",
+            correctAnswer: "ニホンヒキガエル",
+            explanation: "🔬 **正解：ニホンヒキガエル**<br>皮膚の分泌液に触れた後は必ず手を洗いましょう。"
+        },
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="35" ry="45" fill="#8c6d46" stroke="#13281f" stroke-width="3"/></svg>`,
+            question: "【画像第4問】皮膚表面にイボ状の突起が多く、刺激を与えると粘着性の白い液体を分泌する小型のカエルは？",
+            hint: "水田の耕起や泥地を好み、「イボガエル」の別名でも知られます。",
+            correctAnswer: "ツチガエル",
+            explanation: "🔬 **正解：ツチガエル**<br>日本のカエルで唯一、オタマジャクシのまま越冬する生態を持ちます。"
+        },
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#b06540" stroke="#13281f" stroke-width="3"/></svg>`,
+            question: "【画像第5問】早春（2〜3月）の雪解け直後から活動を開始し、赤褐色の体色を持つアカガエル属は？",
+            hint: "「ヤマアカガエル」と並び、早春を告げる代表的な鳴き声（「クゥルルル…」）を上げます。",
+            correctAnswer: "ニホンアカガエル",
+            explanation: "🔬 **正解：ニホンアカガエル**<br>産卵期が極めて早いのが特徴的な春告げガエルです。"
+        },
+
+        // 【鳴き声クイズ 5問】
+        {
+            type: 'sound', customSrc: null, synthSound: 'amagaeru',
+            question: "【鳴き声第1問】低気圧の接近時に盛んに鳴くことで知られる、おなじみの音声を発する種を選びなさい。",
+            hint: "目の後ろを通る黒いアイマスク状の模様が特徴。環境に合わせて体色を変化させます。",
+            correctAnswer: "ニホンアマガエル",
+            explanation: "🔬 **正解：ニホンアマガエル**<br>通称「雨鳴き」と呼ばれる気圧変動に連動した鳴き声を発します。"
+        },
+        {
+            type: 'sound', customSrc: null, synthSound: 'ushigaeru',
+            question: "【鳴き声第2問】「モーモー」と牛に似た低く響く大音量で鳴く、外来大型種の音声データはどれか？",
+            hint: "北米原産。日本国内のカエル類としては最大級の大きさを誇ります。",
+            correctAnswer: "ウシガエル",
+            explanation: "🔬 **正解：ウシガエル**<br>生態系への影響が大きく、特定外来生物に指定されています。"
+        },
+        {
+            type: 'sound', customSrc: null, synthSound: 'kajika',
+            question: "【鳴き声第3問】渓流の美しい水音に似た、澄んだ美しい声で「リリリ…」と鳴くカエルを選べ。",
+            hint: "渓流や清流の岩陰を好み、美しい声から「温泉の看板」などとしても親しまれます。",
+            correctAnswer: "カジカガエル",
+            explanation: "🔬 **正解：カジカガエル**<br>「鳴き声の王様」とも称されるほど非常に美しく澄んだ美声を持ちます。"
+        },
+        {
+            type: 'sound', customSrc: null, synthSound: 'kajika_sound',
+            question: "【鳴き声第4問】「キュルルル…」あるいは「ミャーミャー」とネコに似た声で鳴く、樹上性の緑色のカエルは？",
+            hint: "森林の中に張り出した樹木の枝や葉の上で生活し、泡の巣に卵を産みます。",
+            correctAnswer: "モリアオガエル",
+            explanation: "🔬 **正解：モリアオガエル**<br>樹上の枝に白い泡状の卵塊を産み付けることで有名です。"
+        },
+        {
+            type: 'sound', customSrc: null, synthSound: 'minmin_frog',
+            question: "【鳴き声第5問】「クワッ、クワッ」と濁った大きな声で鳴き、水田や湿地で群れを作って繁殖するアカガエル科の種は？",
+            hint: "「トノサマガエル」などと混同されやすい、日本各地の水田の代表的な住人です。",
+            correctAnswer: "トウキョウダルマガエル",
+            explanation: "🔬 **正解：トウキョウダルマガエル**<br>ダルマガエル類特有の低く響くような鳴き声を上げます。"
+        },
+
+        // 【生態クイズ 5問】
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><rect x="15" y="30" width="70" height="40" rx="20" fill="#52796f" stroke="#13281f" stroke-width="3"/></svg>`,
+            question: "【生態第1問】木の枝に地上から離れた「白い泡の塊（卵塊）」を産み付けることで有名な日本の固有種は？",
+            hint: "メスが手足を使って卵と粘液を泡立て、木の上の安全な場所に卵を保護します。",
+            correctAnswer: "モリアオガエル",
+            explanation: "🔬 **正解：モリアオガエル**<br>孵化したオタマジャクシは下の水面にポチャンと落ちて水中生活を始めます。"
+        },
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="#3a5a40" stroke="#cfa85d" stroke-width="3"/></svg>`,
+            question: "【生態第2問】日本のカエルの中で唯一、オタマジャクシの形態のまま冬を越し（越冬）、翌春に上陸する生態を持つのは？",
+            hint: "成体だけでなく、幼生（オタマジャクシ）の段階でも低温環境に適応しています。",
+            correctAnswer: "ツチガエル",
+            explanation: "🔬 **正解：ツチガエル**<br>水温が低い冬の間も底泥などで過ごし、春にカエルへと変態します。"
+        },
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><polygon points="50,10 90,90 10,90" fill="#354f52" stroke="#cfa85d" stroke-width="3"/></svg>`,
+            question: "【生態第3問】繁殖期にオス同士がメスを巡って激しく組み合い、数匹から時には数十匹が団子状になって絡み合う行動を何というか？",
+            hint: "ヒキガエル属などでよく見られる、春先の壮絶な一斉繁殖行動です。",
+            correctAnswer: "ヒキガエル合戦（爆産）",
+            explanation: "🔬 **正解：ヒキガエル合戦（爆産）**<br>一箇所に大量の個体が集中し、短期間で一斉に産卵を行います。"
+        },
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#588157" stroke="#13281f" stroke-width="3"/></svg>`,
+            question: "【生態第4問】カエルが冬を越すために行う行動として、一般的に最も一般的なものはどれか？",
+            hint: "気温の低下とともに活動を停止し、代謝を落までじっと過ごします。",
+            correctAnswer: "地中や水底での冬眠",
+            explanation: "🔬 **正解：地中や水底での冬眠**<br>陸生種は地中に潜り、水辺の種は池や沼の底の泥中で冬を越します。"
+        },
+        {
+            type: 'image', customSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><rect x="25" y="25" width="50" height="50" fill="#a3b18a" stroke="#13281f" stroke-width="3"/></svg>`,
+            question: "【生態第5問】オタマジャクシからカエルへの変態プロセスにおいて、最初に外部に現れる四肢の変化（発育）はどれか？",
+            hint: "カエルの体の構造上、後ろ足が先に成長して見えてきます。",
+            correctAnswer: "後ろ足が先に生えてくる",
+            explanation: "🔬 **正解：後ろ足が先に生えてくる**<br>まず後肢が発達し、その後に前足が皮膚を破って現れ、最後に尾が吸収されます。"
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
+    let currentOptions = [];
+    let correctAnswerIndex = 0;
+
+    function startExam() {
+        const nameInput = document.getElementById('examinee-name').value.trim();
+        if (!nameInput) {
+            alert("受験者のお名前を入力してください。");
+            return;
+        }
+        examineeName = nameInput;
+        questionDetails = [];
+        document.getElementById('name-screen').style.display = 'none';
+        document.getElementById('quiz-screen').style.display = 'block';
+        loadQuestion();
+    }
+
+    function initAdminModalList() {
+        const listContainer = document.getElementById('admin-file-list');
+        listContainer.innerHTML = '';
+        quizData.forEach((q, idx) => {
+            const div = document.createElement('div');
+            div.className = 'file-input-group';
+            div.innerHTML = `<strong>第${idx + 1}問 (${q.type === 'sound' ? '音声' : '画像'})</strong><br>
+                ファイル指定: <input type="file" accept="${q.type === 'sound' ? 'audio/*' : 'image/*'}" onchange="loadCustomFile(${idx}, '${q.type}', this)">`;
+            listContainer.appendChild(div);
+        });
+    }
+
+    function openAdminModal() {
+        const inputPass = prompt("管理者用パスワードを入力してください:");
+        if (inputPass === SETTING_PASSWORD) {
+            initAdminModalList();
+            document.getElementById('admin-modal').style.display = 'flex';
+        } else if (inputPass !== null) {
+            alert("認証エラー: パスワードが一致しません。");
+        }
+    }
+
+    function closeAdminModal() {
+        document.getElementById('admin-modal').style.display = 'none';
+    }
+
+    function toggleHint() {
+        const content = document.getElementById('hint-content');
+        const btn = document.querySelector('.hint-toggle-btn');
+        if (content.style.display === 'block') {
+            content.style.display = 'none';
+            btn.innerHTML = '🔍 ヒントを閲覧する（折りたたみ） 🔽';
+        } else {
+            content.style.display = 'block';
+            btn.innerHTML = '🔍 ヒントを閉じる 🔼';
+        }
+    }
+
+    function loadCustomFile(qIndex, type, input) {
+        const file = input.files[0];
+        if (!file) return;
+        const fileURL = URL.createObjectURL(file);
+        quizData[qIndex].customSrc = fileURL;
+        if (currentQuestionIndex === qIndex) loadQuestion();
+    }
+
+    function playAudio(qIndex) {
+        const data = quizData[qIndex];
+        if (data.customSrc && data.type === 'sound') {
+            const audio = new Audio(data.customSrc);
+            audio.play();
+        } else {
+            playSyntheticSound(data.synthSound || 'amagaeru');
+        }
+    }
+
+    function generateOptions(correctAnswer) {
+        let pool = famousJapaneseFrogs.filter(f => f !== correctAnswer);
+        // ランダムに3つ選出
+        let shuffledPool = pool.sort(() => 0.5 - Math.random());
+        let wrongOptions = shuffledPool.slice(0, 3);
+        
+        let options = [correctAnswer, ...wrongOptions];
+        // 選択肢の順番をシャッフル
+        options = options.sort(() => 0.5 - Math.random());
+        
+        correctAnswerIndex = options.indexOf(correctAnswer);
+        return options;
+    }
+
+    function loadQuestion() {
+        answered = false;
+        const currentData = quizData[currentQuestionIndex];
+        
+        currentOptions = generateOptions(currentData.correctAnswer);
+
+        document.getElementById('question-number').innerText = `第${currentQuestionIndex + 1}問 / 全15問`;
+        document.getElementById('score-count').innerText = `適性スコア: ${score}`;
+        document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / quizData.length) * 100}%`;
+
+        const stage = document.getElementById('stage-box');
+        if (currentData.type === 'sound') {
+            stage.innerHTML = `<button class="sound-btn" onclick="playAudio(${currentQuestionIndex})">🔊 音声標本を再生する</button>`;
+        } else if (currentData.customSrc && currentData.type === 'image') {
+            stage.innerHTML = `<img src="${currentData.customSrc}" class="quiz-img" alt="標本画像">`;
+        } else {
+            stage.innerHTML = currentData.svgFallback;
+        }
+
+        document.getElementById('question').innerText = currentData.question;
+        
+        const hintContent = document.getElementById('hint-content');
+        hintContent.innerText = currentData.hint;
+        hintContent.style.display = 'none';
+        document.querySelector('.hint-toggle-btn').innerHTML = '🔍 ヒントを閲覧する（折りたたみ） 🔽';
+
+        const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach((btn, index) => {
+            btn.innerText = `${index + 1}. ${currentOptions[index]}`;
+            btn.className = 'option-btn';
+            btn.disabled = false;
+        });
+
+        document.getElementById('explanation').style.display = 'none';
+        document.getElementById('next-btn').style.display = 'none';
+    }
+
+    function selectAnswer(selectedIndex) {
+        if (answered) return;
+        answered = true;
+
+        const currentData = quizData[currentQuestionIndex];
+        const buttons = document.querySelectorAll('.option-btn');
+        buttons.forEach(btn => btn.disabled = true);
+
+        if (selectedIndex === correctAnswerIndex) {
+            buttons[selectedIndex].classList.add('correct');
+            playSyntheticSound('SE_correct');
+            // 紙吹雪の演出は削除しました
+            score++;
+            questionDetails.push("〇");
+            document.getElementById('score-count').innerText = `適性スコア: ${score}`;
+        } else {
+            buttons[selectedIndex].classList.add('wrong');
+            buttons[correctAnswerIndex].classList.add('correct');
+            playSyntheticSound('SE_wrong');
+            questionDetails.push("×");
+        }
+
+        document.getElementById('explanation').innerHTML = currentData.explanation;
+        document.getElementById('explanation').style.display = 'block';
+        
+        const nextBtn = document.getElementById('next-btn');
+        nextBtn.innerText = (currentQuestionIndex === quizData.length - 1) ? '最終鑑定結果を確認 ➔' : '次の問題へ進む ➔';
+        nextBtn.style.display = 'block';
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) loadQuestion();
+        else showResult();
+    }
+
+    function showResult() {
+        document.getElementById('quiz-screen').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        document.getElementById('final-score').innerText = `${score} / ${quizData.length}`;
+        document.getElementById('cert-user-title').innerText = `${examineeName} さんの能力鑑定結果`;
+        
+        let statusText = "";
+        let msg = "";
+        if (score === quizData.length) {
+            statusText = "合格";
+            msg = "【判定: 【合格】】<br>全15問全問正解です！卓越した両生類識別・生態鑑定能力が認められました。";
+        } else {
+            statusText = "不合格（再試験必要）";
+            msg = "【判定: 【不合格】再試験が必要です】<br>合格には全問正解（15問中15問）が必須となります。";
+        }
+        document.getElementById('result-message').innerHTML = msg;
+
+        const sheetStatus = document.getElementById('sheet-status');
+        sheetStatus.innerText = `[送信中] 試験結果を管理者へ送信しています...`;
+
+        if (GAS_WEB_APP_URL) {
+            fetch(GAS_WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name: examineeName,
+                    score: score,
+                    total: quizData.length,
+                    status: statusTest,
+                    details: questionDetails
+                })
+            }).then(() => {
+                sheetStatus.innerText = `試験結果は管理者に送信されました`;
+            }).catch(() => {
+                sheetStatus.innerText = `試験結果は管理者に送信されました`;
+            });
+        }
+    }
+
+    function restartQuiz() {
+        currentQuestionIndex = 0; score = 0; questionDetails = [];
+        document.getElementById('result-screen').style.display = 'none';
+        document.getElementById('name-screen').style.display = 'block';
+        document.getElementById('examinee-name').value = "";
+    }
+</script>
+
+</body>
+</html>
