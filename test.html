@@ -100,24 +100,6 @@
             font-weight: 700;
         }
 
-        .admin-toggle-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(207, 168, 93, 0.5);
-            border-radius: 6px;
-            padding: 5px 12px;
-            font-size: 0.75rem;
-            color: var(--jari-gold-light);
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Zen Kaku Gothic New', sans-serif;
-            font-weight: 700;
-        }
-
-        .admin-toggle-btn:hover {
-            background: var(--jari-gold);
-            color: var(--jari-deep);
-        }
-
         .card-body {
             padding: 24px;
         }
@@ -412,66 +394,6 @@
             cursor: pointer;
             font-family: 'Zen Kaku Gothic New', sans-serif;
         }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 28, 22, 0.7);
-            backdrop-filter: blur(2px);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: #fff;
-            padding: 24px;
-            border-radius: 12px;
-            max-width: 420px;
-            width: 88%;
-            color: var(--text-main);
-            text-align: left;
-            border: 2px solid var(--jari-gold);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-content h3 {
-            margin-top: 0;
-            color: var(--jari-deep);
-            font-size: 1.05rem;
-            font-family: 'Shippori Mincho', serif;
-            border-bottom: 2px solid var(--jari-gold-light);
-            padding-bottom: 8px;
-        }
-
-        .file-input-group {
-            margin: 10px 0;
-            font-size: 0.8rem;
-            border-bottom: 1px dashed #e0e0e0;
-            padding-bottom: 8px;
-        }
-
-        .file-input-group input[type="file"] {
-            margin-top: 4px;
-            display: block;
-            width: 100%;
-            font-size: 0.75rem;
-        }
-
-        .close-modal-btn {
-            margin-top: 16px;
-            width: 100%;
-            padding: 10px;
-            background: var(--jari-deep);
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: 'Zen Kaku Gothic New', sans-serif;
-        }
     </style>
 </head>
 <body>
@@ -495,7 +417,6 @@
                 <p>JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
             </div>
         </div>
-        <button class="admin-toggle-btn" onclick="openAdminModal()">⚙️ 管理者用</button>
     </div>
 
     <div class="card-body">
@@ -554,20 +475,8 @@
     &copy; Japan Association for Amphibian Science. All Rights Reserved.
 </div>
 
-<div class="modal-overlay" id="admin-modal">
-    <div class="modal-content">
-        <h3>⚙️ 各設問の素材データ設定</h3>
-        <p style="font-size: 0.75rem; color: #666; margin-bottom: 10px;">画像・音声問題の個別ファイル（画像/音声）を差し替え可能です。</p>
-        
-        <div id="admin-file-list"></div>
-
-        <button class="close-modal-btn" onclick="closeAdminModal()">設定を確定して戻る</button>
-    </div>
-</div>
-
 <script>
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const SETTING_PASSWORD = "393230";
     
     const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx5RMbHIZOzQyw_fG-hkBseYKMs9WuZ63Zr7nGokzKWLGclHOcjxW3Sjoe0-UNi0V3j/exec";
 
@@ -643,9 +552,10 @@
     }
 
     const quizData = [
-        // 【生態クイズ 10問（画像なし・専用選択肢）】
+        // 【生態クイズ 10問（画像付き・専用選択肢）】
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="#32634b" stroke="#13281f" stroke-width="3"/></svg>`,
             question: "【生態第1問】水辺の樹木の枝に、白い泡状の卵塊（泡の巣）を産み付ける生態を持つ日本の固有種は？",
             hint: "メスが分泌液と空気を混ぜ合わせて泡をつくり、乾燥から卵を守ります。",
             options: ["シュレーゲルアオガエル", "モリアオガエル", "ニホンアマガエル", "カジカガエル"],
@@ -653,7 +563,8 @@
             explanation: "🔬 **正解：モリアオガエル**<br>樹上に産み付けられた泡の中で卵が孵化し、幼虫（オタマジャクシ）は下の水面へ落下して成長します。"
         },
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><rect x="25" y="25" width="50" height="50" rx="8" fill="#8c6d46" stroke="#13281f" stroke-width="3"/></svg>`,
             question: "【生態第2問】日本のカエルの中で唯一、幼生（オタマジャクシ）のまま水中で冬を越し、翌春に変態する種はどれか？",
             hint: "水温の低い冬の間も泥底でじっと過ごし、春になるとカエルになります。",
             options: ["ニホンアカガエル", "トノサマガエル", "ツチガエル", "ニホンヒキガエル"],
@@ -661,7 +572,8 @@
             explanation: "🔬 **正解：ツチガエル**<br>日本のカエルで唯一、オタマジャクシの状態で越冬する特異な生態を持っています。"
         },
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="35" cy="50" r="20" fill="#2d503f"/><circle cx="65" cy="50" r="20" fill="#32634b"/></svg>`,
             question: "【生態第3問】早春の繁殖期において、複数のオスが1匹のメスをめぐって集まり、数匹〜数十匹の球状になって絡み合う行動を何と呼ぶか？",
             hint: "ヒキガエルなどで見られる、短期間に一斉に行われる激しい繁殖行動です。",
             options: ["カエル合戦（爆産）", "抱接輪舞（こうせつりんぶ）", "群れ鳴き陣", "越冬集団行動"],
@@ -669,7 +581,8 @@
             explanation: "🔬 **正解：カエル合戦（爆産）**<br>池や沼の限られた場所にオスが殺到し、メスを奪い合うことで形成される球状の固まりです。"
         },
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="40" ry="25" fill="#4a5d4e" stroke="#cfa85d" stroke-width="3"/></svg>`,
             question: "【生態第4問】カエルなどの両生類が「皮膚呼吸」を行うために、皮膚の表面について常に保たれている必要な状態はどれか？",
             hint: "乾いてしまうと酸素の取り込みができなくなり、呼吸困難に陥ってしまいます。",
             options: ["硬い角質で覆われている", "常に粘液で湿っている", "直射日光で乾燥している", "微細な毛で覆われている"],
@@ -677,7 +590,8 @@
             explanation: "🔬 **正解：常に粘液で湿っている**<br>両生類は皮膚の表面にある水分（粘液）を通じて気体交換を行うため、乾燥に非常に弱い性質を持っています。"
         },
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><path d="M30 70 L50 30 L70 70 Z" fill="#32634b" stroke="#cfa85d" stroke-width="3"/></svg>`,
             question: "【生態第5問】オタマジャクシからカエルへと変態する際、外見上に最初に現れる四肢の変化はどれか？",
             hint: "体の後方から順に四肢が形成されていきます。",
             options: ["前足が先に生えてくる", "後ろ足が先に生えてくる", "前足と後ろ足が同時に伸びる", "先に尾が消えてから足が生える"],
@@ -685,7 +599,8 @@
             explanation: "🔬 **正解：後ろ足が先に生えてくる**<br>まず後肢が突起状に現れて発達し、その後に前肢が皮膚を破って生え出し、最後に尾が体内に吸収されます。"
         },
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="none" stroke="#cfa85d" stroke-width="6"/></svg>`,
             question: "【生態第6問】カエルのオスが繁殖期に大きな鳴き声を出す際、顎の下などを膨らませる器官の名称は？",
             hint: "声帯で生じた音を共鳴させて大きく増幅させるスピーカーのような役割を持ちます。",
             options: ["鳴嚢（めいのう / 鳴き袋）", "咽頭腔（いんとうこう）", "気嚢（きのう）", "響胸膜（きょうきょうまく）"],
@@ -693,7 +608,8 @@
             explanation: "🔬 **正解：鳴嚢（めいのう / 鳴き袋）**<br>口の中に送った空気を共鳴させることで、小さな体から遠くまで響く大音量を発生させることができます。"
         },
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><rect x="15" y="15" width="70" height="70" fill="#b06540" stroke="#13281f" stroke-width="3"/></svg>`,
             question: "【生態第7問】日本における特定外来生物に指定されており、飼育や運搬、野外への放出が法律で厳重に禁止されている大型カエルは？",
             hint: "食用として北米から持ち込まれ、在来の両生類や小型動物を捕食し生態系に大きな影響を与えています。",
             options: ["ウシガエル", "アフリカツメガエル", "ヒキガエル", "タピオカガエル"],
@@ -701,7 +617,8 @@
             explanation: "🔬 **正解：ウシガエル**<br>特定外来生物に指定されており、生態系破壊を防ぐため生きたままの移動や飼育が規制されています。"
         },
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="#1f3d2f" stroke="#cfa85d" stroke-width="3"/></svg>`,
             question: "【生態第8問】カエルが大きな獲物を飲み込む際、口の中へ獲物を押し込むために補助的に使う体の部位はどれか？",
             hint: "食べものを飲み込む瞬間、頭部にある特徴的なパーツをグッと引っ込めます。",
             options: ["長い前足", "眼球（目）", "強力な舌", "鼓膜"],
@@ -709,7 +626,8 @@
             explanation: "🔬 **正解：眼球（目）**<br>カエルは眼球を頭の中に引き込むことで、口の天井を押し下げ、獲物を喉の奥へと押し込みます。"
         },
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><path d="M20 50 Q 50 20, 80 50 T 20 50" fill="#32634b"/></svg>`,
             question: "【生態第9問】多くの成体カエルは完全な肉食性ですが、孵化直後の「オタマジャクシ」の一般的な主食はどれか？",
             hint: "水中の岩についた苔やデトリタス（有機物かす）などを削り取って食べています。",
             options: ["小魚やエビ", "水生昆虫の成虫", "藻類や有機物のくず（植物質中心）", "水面に落ちた陸生昆虫"],
@@ -717,7 +635,8 @@
             explanation: "🔬 **正解：藻類や有機物のくず（植物質中心）**<br>オタマジャクシの多くは雑食〜草食性（藻類やデトリタス）ですが、成長してカエルになると肉食性に変化します。"
         },
         {
-            type: 'eco',
+            type: 'eco-image', imageSrc: null,
+            svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><line x1="10" y1="90" x2="90" y2="10" stroke="#cfa85d" stroke-width="8"/></svg>`,
             question: "【生態第10問】日本の水田周辺に棲むカエルたちが、冬（12月〜2月頃）を過ごす主な方法として最も適切なものはどれか？",
             hint: "外気温の低下に伴い代謝を極限まで低下させ、温かい春を待ちます。",
             options: ["南の暖かい地域へ渡り（渡り鳥のように移動）をする", "水底の泥の中や陸上の地中に潜って冬眠する", "木の上の高い枝に集まって群れで越冬する", "卵の状態で冬を越し成体は秋に死滅する"],
@@ -727,7 +646,7 @@
 
         // 【画像クイズ 5問】
         {
-            type: 'image', imageSrc: null, customSrc: null,
+            type: 'image', imageSrc: null,
             svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="28" cy="28" r="14" fill="#32634b" stroke="#13281f" stroke-width="3"/><circle cx="72" cy="28" r="14" fill="#32634b" stroke="#13281f" stroke-width="3"/><ellipse cx="50" cy="58" rx="38" ry="28" fill="#32634b" stroke="#13281f" stroke-width="3"/></svg>`,
             question: "【画像第1問】樹上性で、葉の裏などに隠れる緑色の体色と白いラインを持つこのカエルの名前は？",
             hint: "水田周辺の低木で見られ、名前に「アオガエル」とつきますがアオガエル科ではなくアオガエル属の代表種です。",
@@ -735,7 +654,7 @@
             explanation: "🔬 **正解：シュレーゲルアオガエル**<br>吸盤が発達しており樹上生活に適応しています。"
         },
         {
-            type: 'image', imageSrc: null, customSrc: null,
+            type: 'image', imageSrc: null,
             svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" rx="10" fill="#2d503f" stroke="#cfa85d" stroke-width="3"/></svg>`,
             question: "【画像第2問】日本固有種で、平地から丘陵地の水田・湿地に広く生息し、後肢が長く俊敏に跳ねる代表的なカエルは？",
             hint: "背中に明瞭な背中線（あるいは背側線）があり、かつては日本の代表的なトノサマ的存在でした。",
@@ -743,7 +662,7 @@
             explanation: "🔬 **正解：トノサマガエル**<br>俊敏な跳躍力と警戒心の強さが特徴です。"
         },
         {
-            type: 'image', imageSrc: null, customSrc: null,
+            type: 'image', imageSrc: null,
             svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#4a5d4e" stroke="#cfa85d" stroke-width="3"/></svg>`,
             question: "【画像第3問】全身がイボに覆われ、毒腺（耳下腺）から強力な分泌液を出す陸生傾向の強い大型種は？",
             hint: "春先の繁殖期には大きな塊（ヒキガエル合戦）をつくることでも有名です。",
@@ -751,7 +670,7 @@
             explanation: "🔬 **正解：ニホンヒキガエル**<br>皮膚の分泌液に触れた後は必ず手を洗いましょう。"
         },
         {
-            type: 'image', imageSrc: null, customSrc: null,
+            type: 'image', imageSrc: null,
             svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="35" ry="45" fill="#8c6d46" stroke="#13281f" stroke-width="3"/></svg>`,
             question: "【画像第4問】皮膚表面にイボ状の突起が多く、刺激を与えると粘着性の白い液体を分泌する小型のカエルは？",
             hint: "水田の耕起や泥地を好み、「イボガエル」の別名でも知られます。",
@@ -759,7 +678,7 @@
             explanation: "🔬 **正解：ツチガエル**<br>日本のカエルで唯一、オタマジャクシのまま越冬する生態を持ちます。"
         },
         {
-            type: 'image', imageSrc: null, customSrc: null,
+            type: 'image', imageSrc: null,
             svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#b06540" stroke="#13281f" stroke-width="3"/></svg>`,
             question: "【画像第5問】早春（2〜3月）の雪解け直後から活動を開始し、赤褐色の体色を持つアカガエル属は？",
             hint: "「ヤマアカガエル」と並び、早春を告げる代表的な鳴き声（「クゥルルル…」）を上げます。",
@@ -769,35 +688,35 @@
 
         // 【鳴き声クイズ 5問】
         {
-            type: 'sound', audioSrc: null, customSrc: null, synthSound: 'amagaeru',
+            type: 'sound', audioSrc: null, synthSound: 'amagaeru',
             question: "【鳴き声第1問】低気圧の接近時に盛んに鳴くことで知られる、おなじみの音声を発する種を選びなさい。",
             hint: "目の後ろを通る黒いアイマスク状の模様が特徴。環境に合わせて体色を変化させます。",
             correctAnswer: "ニホンアマガエル",
             explanation: "🔬 **正解：ニホンアマガエル**<br>通称「雨鳴き」と呼ばれる気圧変動に連動した鳴き声を発します。"
         },
         {
-            type: 'sound', audioSrc: null, customSrc: null, synthSound: 'ushigaeru',
+            type: 'sound', audioSrc: null, synthSound: 'ushigaeru',
             question: "【鳴き声第2問】「モーモー」と牛に似た低く響く大音量で鳴く、外来大型種の音声データはどれか？",
             hint: "北米原産。日本国内のカエル類としては最大級の大きさを誇ります。",
             correctAnswer: "ウシガエル",
             explanation: "🔬 **正解：ウシガエル**<br>生態系への影響が大きく、特定外来生物に指定されています。"
         },
         {
-            type: 'sound', audioSrc: null, customSrc: null, synthSound: 'kajika',
+            type: 'sound', audioSrc: null, synthSound: 'kajika',
             question: "【鳴き声第3問】渓流の美しい水音に似た、澄んだ美しい声で「リリリ…」と鳴くカエルを選べ。",
             hint: "渓流や清流の岩陰を好み、美しい声から「温泉の看板」などとしても親しまれます。",
             correctAnswer: "カジカガエル",
             explanation: "🔬 **正解：カジカガエル**<br>「鳴き声の王様」とも称されるほど非常に美しく澄んだ美声を持ちます。"
         },
         {
-            type: 'sound', audioSrc: null, customSrc: null, synthSound: 'kajika_sound',
+            type: 'sound', audioSrc: null, synthSound: 'kajika_sound',
             question: "【鳴き声第4問】「キュルルル…」あるいは「ミャーミャー」とネコに似た声で鳴く、樹上性の緑色のカエルは？",
             hint: "森林の中に張り出した樹木の枝や葉の上で生活し、泡の巣に卵を産みます。",
             correctAnswer: "モリアオガエル",
             explanation: "🔬 **正解：モリアオガエル**<br>樹上の枝に白い泡状の卵塊を産み付けることで有名です。"
         },
         {
-            type: 'sound', audioSrc: null, customSrc: null, synthSound: 'minmin_frog',
+            type: 'sound', audioSrc: null, synthSound: 'minmin_frog',
             question: "【鳴き声第5問】「クワッ、クワッ」と濁った大きな声で鳴き、水田や湿地で群れを作って繁殖するアカガエル科の種は？",
             hint: "「トノサマガエル」などと混同されやすい、日本各地の水田の代表的な住人です。",
             correctAnswer: "トウキョウダルマガエル",
@@ -824,33 +743,6 @@
         loadQuestion();
     }
 
-    function initAdminModalList() {
-        const listContainer = document.getElementById('admin-file-list');
-        listContainer.innerHTML = '';
-        quizData.forEach((q, idx) => {
-            if (q.type === 'eco') return; // 生態クイズはファイル設定不要
-            const div = document.createElement('div');
-            div.className = 'file-input-group';
-            div.innerHTML = `<strong>第${idx + 1}問 (${q.type === 'sound' ? '音声' : '画像'})</strong><br>
-                ファイル指定: <input type="file" accept="${q.type === 'sound' ? 'audio/*' : 'image/*'}" onchange="loadCustomFile(${idx}, '${q.type}', this)">`;
-            listContainer.appendChild(div);
-        });
-    }
-
-    function openAdminModal() {
-        const inputPass = prompt("管理者用パスワードを入力してください:");
-        if (inputPass === SETTING_PASSWORD) {
-            initAdminModalList();
-            document.getElementById('admin-modal').style.display = 'flex';
-        } else if (inputPass !== null) {
-            alert("認証エラー: パスワードが一致しません。");
-        }
-    }
-
-    function closeAdminModal() {
-        document.getElementById('admin-modal').style.display = 'none';
-    }
-
     function toggleHint() {
         const content = document.getElementById('hint-content');
         const btn = document.querySelector('.hint-toggle-btn');
@@ -863,18 +755,9 @@
         }
     }
 
-    function loadCustomFile(qIndex, type, input) {
-        const file = input.files[0];
-        if (!file) return;
-        const fileURL = URL.createObjectURL(file);
-        quizData[qIndex].customSrc = fileURL;
-        if (currentQuestionIndex === qIndex) loadQuestion();
-    }
-
     function playAudio(qIndex) {
         const data = quizData[qIndex];
-        // 管理者でアップロードされたカスタムファイル、設定済みのファイル、あるいは GitHub上の "test[番号].mp3" を優先的に読み込む
-        const audioSrc = data.customSrc || data.audioSrc || `test${qIndex + 1}.mp3`;
+        const audioSrc = data.audioSrc || `test${qIndex + 1}.mp3`;
         
         const audio = new Audio(audioSrc);
         audio.play().catch(error => {
@@ -904,26 +787,22 @@
         document.getElementById('progress-bar').style.width = `${(currentQuestionIndex / quizData.length) * 100}%`;
 
         const stage = document.getElementById('stage-box');
+        stage.style.display = 'flex';
 
-        if (currentData.type === 'eco') {
-            // 生態クイズ：画像エリアは出さない
-            stage.style.display = 'none';
+        if (currentData.type === 'sound') {
+            stage.innerHTML = `<button class="sound-btn" onclick="playAudio(${currentQuestionIndex})">🔊 音声標本を再生する</button>`;
+            currentOptions = generateOptions(currentData.correctAnswer);
+        } else if (currentData.type === 'eco-image') {
+            const activeImgSrc = currentData.imageSrc || `test${currentQuestionIndex + 1}.jpeg`;
+            stage.innerHTML = `<img src="${activeImgSrc}" class="quiz-img" alt="標本画像" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
+                              `<div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; position:absolute; top:0; left:0;">${currentData.svgFallback}</div>`;
             currentOptions = currentData.options;
             correctAnswerIndex = currentData.correctAnswerIndex;
         } else {
-            stage.style.display = 'flex';
+            const activeImgSrc = currentData.imageSrc || `test${currentQuestionIndex + 1}.jpeg`;
+            stage.innerHTML = `<img src="${activeImgSrc}" class="quiz-img" alt="標本画像" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
+                              `<div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; position:absolute; top:0; left:0;">${currentData.svgFallback}</div>`;
             currentOptions = generateOptions(currentData.correctAnswer);
-
-            if (currentData.type === 'sound') {
-                stage.innerHTML = `<button class="sound-btn" onclick="playAudio(${currentQuestionIndex})">🔊 音声標本を再生する</button>`;
-            } else {
-                // カスタムファイル、設定済み画像、あるいは GitHub上の "test[番号].jpeg" を優先的に読み込む
-                const activeImgSrc = currentData.customSrc || currentData.imageSrc || `test${currentQuestionIndex + 1}.jpeg`;
-                
-                // 画像の読み込みに失敗した場合はSVGフォールバックを表示する
-                stage.innerHTML = `<img src="${activeImgSrc}" class="quiz-img" alt="標本画像" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
-                                  `<div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; position:absolute; top:0; left:0;">${currentData.svgFallback}</div>`;
-            }
         }
 
         document.getElementById('question').innerText = currentData.question;
