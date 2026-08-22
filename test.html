@@ -64,7 +64,6 @@
             align-items: center;
         }
 
-        /* ロゴ＆タイトルエリアをリンク化するためのスタイル調整 */
         .header-link {
             display: flex;
             align-items: center;
@@ -416,7 +415,6 @@
 
 <div class="institute-card">
     <div class="institution-header">
-        <!-- 変更点：ロゴとタイトル部分全体を index.html へのリンク(<a>タグ)に変更 -->
         <a href="index.html" class="header-link">
             <div class="logo-area">
                 <div class="institute-symbol">
@@ -571,7 +569,6 @@
     }
 
     const quizData = [
-        // 【生態クイズ 10問（画像付き・専用選択肢）】
         {
             type: 'eco-image', imageSrc: null,
             svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="#32634b" stroke="#13281f" stroke-width="3"/></svg>`,
@@ -663,7 +660,6 @@
             explanation: "🔬 **正解：水底の泥の中や陸上の地中に潜って冬眠する**<br>水生傾向の強い種は泥底で、陸生傾向の種は凍結しない地中や倒木の下などで冬眠します。"
         },
 
-        // 【画像クイズ 5問】
         {
             type: 'image', imageSrc: null,
             svgFallback: `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="28" cy="28" r="14" fill="#32634b" stroke="#13281f" stroke-width="3"/><circle cx="72" cy="28" r="14" fill="#32634b" stroke="#13281f" stroke-width="3"/><ellipse cx="50" cy="58" rx="38" ry="28" fill="#32634b" stroke="#13281f" stroke-width="3"/></svg>`,
@@ -705,7 +701,6 @@
             explanation: "🔬 **正解：ニホンアカガエル**<br>産卵期が極めて早いのが特徴的な春告げガエルです。"
         },
 
-        // 【鳴き声クイズ 5問】
         {
             type: 'sound', audioSrc: null, synthSound: 'amagaeru',
             question: "【鳴き声第1問】低気圧の接近時に盛んに鳴くことで知られる、おなじみの音声を発する種を選びなさい。",
@@ -776,7 +771,7 @@
 
     function playAudio(qIndex) {
         const data = quizData[qIndex];
-        const audioSrc = data.audioSrc || `test${qIndex + 1}.mp3`;
+        const audioSrc = data.audioSrc || `image/test${qIndex + 1}.mp3`; // 必要に応じて音声もimage配下にする場合はここを変更
         
         const audio = new Audio(audioSrc);
         audio.play().catch(error => {
@@ -812,13 +807,15 @@
             stage.innerHTML = `<button class="sound-btn" onclick="playAudio(${currentQuestionIndex})">🔊 音声標本を再生する</button>`;
             currentOptions = generateOptions(currentData.correctAnswer);
         } else if (currentData.type === 'eco-image') {
-            const activeImgSrc = currentData.imageSrc || `test${currentQuestionIndex + 1}.jpg`;
+            // ▼▼▼ ここを image/ ディレクトリを参照するように変更 ▼▼▼
+            const activeImgSrc = currentData.imageSrc || `image/test${currentQuestionIndex + 1}.jpg`;
             stage.innerHTML = `<img src="${activeImgSrc}" class="quiz-img" alt="標本画像" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
                               `<div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; position:absolute; top:0; left:0;">${currentData.svgFallback}</div>`;
             currentOptions = currentData.options;
             correctAnswerIndex = currentData.correctAnswerIndex;
         } else {
-            const activeImgSrc = currentData.imageSrc || `test${currentQuestionIndex + 1}.jpg`;
+            // ▼▼▼ ここを image/ ディレクトリを参照するように変更 ▼▼▼
+            const activeImgSrc = currentData.imageSrc || `image/test${currentQuestionIndex + 1}.jpg`;
             stage.innerHTML = `<img src="${activeImgSrc}" class="quiz-img" alt="標本画像" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
                               `<div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; position:absolute; top:0; left:0;">${currentData.svgFallback}</div>`;
             currentOptions = generateOptions(currentData.correctAnswer);
