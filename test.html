@@ -501,7 +501,7 @@
     <div class="card-body">
         <div id="name-screen">
             <h2>受験者情報入力</h2>
-            <p>両生類音声識別・生態鑑定能力試験を開始する前に、あなたのお名前を入力してください。</p>
+            <p>両生類音声識別・生態鑑定能力試験を開始する前に、あなたの名前を入力してください。</p>
             <input type="text" id="examinee-name" class="name-input" placeholder="例：山田 太郎">
             <button class="start-exam-btn" onclick="startExam()">試験を開始する ➔</button>
         </div>
@@ -814,7 +814,7 @@
     function startExam() {
         const nameInput = document.getElementById('examinee-name').value.trim();
         if (!nameInput) {
-            alert("受験者のお名前を入力してください。");
+            alert("受験者の名前を入力してください。");
             return;
         }
         examineeName = nameInput;
@@ -873,15 +873,14 @@
 
     function playAudio(qIndex) {
         const data = quizData[qIndex];
-        if (data.customSrc) {
-            const audio = new Audio(data.customSrc);
-            audio.play();
-        } else if (data.audioSrc) {
-            const audio = new Audio(data.audioSrc);
-            audio.play();
-        } else {
+        // 管理者でアップロードされたカスタムファイル、設定済みのファイル、あるいは GitHub上の "test[番号].mp3" を優先的に読み込む
+        const audioSrc = data.customSrc || data.audioSrc || `test${qIndex + 1}.mp3`;
+        
+        const audio = new Audio(audioSrc);
+        audio.play().catch(error => {
+            console.log("音声ファイルの読み込みに失敗したため、合成音声を再生します。", error);
             playSyntheticSound(data.synthSound || 'amagaeru');
-        }
+        });
     }
 
     function generateOptions(correctAnswer) {
@@ -918,12 +917,12 @@
             if (currentData.type === 'sound') {
                 stage.innerHTML = `<button class="sound-btn" onclick="playAudio(${currentQuestionIndex})">🔊 音声標本を再生する</button>`;
             } else {
-                const activeImgSrc = currentData.customSrc || currentData.imageSrc;
-                if (activeImgSrc) {
-                    stage.innerHTML = `<img src="${activeImgSrc}" class="quiz-img" alt="標本画像">`;
-                } else {
-                    stage.innerHTML = currentData.svgFallback;
-                }
+                // カスタムファイル、設定済み画像、あるいは GitHub上の "test[番号].jpeg" を優先的に読み込む
+                const activeImgSrc = currentData.customSrc || currentData.imageSrc || `test${currentQuestionIndex + 1}.jpeg`;
+                
+                // 画像の読み込みに失敗した場合はSVGフォールバックを表示する
+                stage.innerHTML = `<img src="${activeImgSrc}" class="quiz-img" alt="標本画像" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
+                                  `<div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; position:absolute; top:0; left:0;">${currentData.svgFallback}</div>`;
             }
         }
 
