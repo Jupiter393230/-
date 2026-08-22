@@ -64,6 +64,22 @@
             align-items: center;
         }
 
+        /* ロゴ＆タイトルエリアをリンク化するためのスタイル調整 */
+        .header-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.2s;
+        }
+
+        .header-link:hover {
+            opacity: 0.85;
+        }
+
         .logo-area {
             display: flex;
             align-items: center;
@@ -400,23 +416,26 @@
 
 <div class="institute-card">
     <div class="institution-header">
-        <div class="logo-area">
-            <div class="institute-symbol">
-                <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" stroke="#cfa85d" stroke-width="5" fill="none"/>
-                    <circle cx="33" cy="35" r="12" stroke="#cfa85d" stroke-width="6" fill="none"/>
-                    <circle cx="67" cy="35" r="12" stroke="#cfa85d" stroke-width="6" fill="none"/>
-                    <circle cx="33" cy="35" r="4" fill="#cfa85d"/>
-                    <circle cx="67" cy="35" r="4" fill="#cfa85d"/>
-                    <path d="M20 48 C 20 78, 80 78, 80 48" stroke="#cfa85d" stroke-width="7" stroke-linecap="round" fill="none"/>
-                    <path d="M30 68 L 50 80 L 70 68" stroke="#cfa85d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                </svg>
+        <!-- 変更点：ロゴとタイトル部分全体を index.html へのリンク(<a>タグ)に変更 -->
+        <a href="index.html" class="header-link">
+            <div class="logo-area">
+                <div class="institute-symbol">
+                    <svg width="30" height="30" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5" stroke="#cfa85d" stroke-width="5" fill="none"/>
+                        <circle cx="33" cy="35" r="12" stroke="#cfa85d" stroke-width="6" fill="none"/>
+                        <circle cx="67" cy="35" r="12" stroke="#cfa85d" stroke-width="6" fill="none"/>
+                        <circle cx="33" cy="35" r="4" fill="#cfa85d"/>
+                        <circle cx="67" cy="35" r="4" fill="#cfa85d"/>
+                        <path d="M20 48 C 20 78, 80 78, 80 48" stroke="#cfa85d" stroke-width="7" stroke-linecap="round" fill="none"/>
+                        <path d="M30 68 L 50 80 L 70 68" stroke="#cfa85d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </div>
+                <div class="title-group">
+                    <h1>日本両生類学振興財団</h1>
+                    <p>JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+                </div>
             </div>
-            <div class="title-group">
-                <h1>日本両生類学振興財団</h1>
-                <p>JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
-            </div>
-        </div>
+        </a>
     </div>
 
     <div class="card-body">
