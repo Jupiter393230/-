@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本両生類学振興財団｜公式ホームページ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+
+        :root {
+            --jari-deep: #193327;      /* ちょびっと明るく調整した深緑 */
+            --jari-gold: #cfa85d;
+            --jari-bg: #f7f3e8;
+            --text-main: #193327;      /* テキストカラーも統一 */
+        }
+
+        body { font-family: 'Zen Kaku Gothic New', sans-serif; background-color: var(--jari-bg); color: var(--text-main); margin: 0; line-height: 1.6; scroll-behavior: smooth; }
+
+        header { background: var(--jari-deep); color: #fff; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--jari-gold); }
+        header a { color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+        header a:hover { opacity: 0.85; }
+        h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
+        .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
+
+        /* 上部固定ナビゲーション */
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 15px 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(5px);
+            flex-wrap: wrap; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(31, 61, 47, 0.15); 
+            border-bottom: 2px solid var(--jari-gold);
+        }
+        .nav-btn { 
+            background: var(--jari-deep); 
+            color: var(--jari-gold); 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            border: 2px solid var(--jari-gold); 
+            transition: all 0.3s; 
+            text-align: center; 
+        }
+        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        main { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+
+        .section-card { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(31, 61, 47, 0.08); border: 1px solid rgba(207, 168, 93, 0.3); margin-bottom: 30px; overflow: hidden; }
+        .card-content { padding: 30px; }
+
+        /* カエル写真スライドショーエリア（全10種対応） */
+        .frog-slider-box {
+            width: 100%;
+            height: 220px;
+            background: var(--jari-deep);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--jari-gold);
+        }
+        .slider-track {
+            display: flex;
+            width: calc(250px * 20); /* 10枚×2セット分 */
+            animation: scrollSlider 40s linear infinite;
+            height: 100%;
+        }
+        .slide-item {
+            width: 250px;
+            height: 100%;
+            flex-shrink: 0;
+            position: relative;
+            border-right: 2px solid var(--jari-gold);
+            background: var(--jari-deep);
+        }
+        .slide-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: rgba(31, 61, 47, 0.85);
+            color: var(--jari-gold);
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 0;
+        }
+        @keyframes scrollSlider {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 10)); }
+        }
+        
+        h2 { border-left: 5px solid var(--jari-gold); padding-left: 15px; color: var(--jari-deep); margin-top: 0; }
+
+        .news-list { list-style: none; padding: 0; }
+        .news-list li { padding: 12px 0; border-bottom: 1px solid rgba(31, 61, 47, 0.1); }
+        .news-date { color: var(--jari-gold); font-weight: 700; margin-right: 15px; }
+
+        .exam-link-area { text-align: center; padding: 50px 20px; background: var(--jari-deep); color: #fff; border-radius: 12px; margin-top: 40px; border: 2px solid var(--jari-gold); }
+        .exam-btn { display: inline-block; background: var(--jari-gold); color: var(--jari-deep); padding: 22px 60px; text-decoration: none; border-radius: 50px; font-weight: 900; font-size: 1.3rem; margin-top: 25px; transition: 0.3s; }
+        .exam-btn:hover { background: #fff; transform: scale(1.05); }
+
+        /* ページトップへ戻るボタン */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.85rem;
+            border: 2px solid var(--jari-gold);
+            box-shadow: 0 4px 10px rgba(31, 61, 47, 0.3);
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        .back-to-top:hover {
+            background: var(--jari-gold);
+            color: var(--jari-deep);
+            transform: translateY(-4px);
+        }
+
+        /* スポンサー欄 */
+        .sponsor-section {
+            margin-top: 60px;
+            padding: 30px 20px;
+            background: #f0ebe0;
+            border-top: 2px solid rgba(207, 168, 93, 0.4);
+            text-align: center;
+        }
+        .sponsor-title {
+            font-size: 0.9rem;
+            color: var(--jari-deep);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+        .sponsor-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .sponsor-logo {
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--jari-deep);
+            border: 1px solid rgba(31, 61, 47, 0.2);
+            box-shadow: 0 2px 4px rgba(31, 61, 47, 0.05);
+        }
+
+        /* コピーライト */
+        footer {
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <a href="index.html">
+        <h1>日本両生類学振興財団</h1>
+        <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+    </a>
+</header>
+
+<!-- 各指定ページへ直接遷移するナビゲーション -->
+<nav>
+    <a href="about.html" class="nav-btn">当財団について</a>
+    <a href="message.html" class="nav-btn">代表挨拶</a>
+    <a href="archive.html" class="nav-btn">資料アーカイブ</a>
+    <a href="event.html" class="nav-btn">イベント情報</a>
+    <a href="friends.html" class="nav-btn">友の会について</a>
+    <a href="inquiry.html" class="nav-btn">お問い合わせ</a>
+</nav>
+
+<main>
+    <!-- セクション：財団紹介（全10種カエル写真スライドショー付き） -->
+    <section class="section-card" id="about">
+        <div class="frog-slider-box">
+            <div class="slider-track">
+                <!-- セット1（view_1 〜 view_10） -->
+                <div class="slide-item"><img src="image/view_1.jpg" alt="ニホンアマガエル"><div class="slide-caption">ニホンアマガエル</div></div>
+                <div class="slide-item"><img src="image/view_2.jpg" alt="シュレーゲルアオガエル"><div class="slide-caption">シュレーゲルアオガエル</div></div>
+                <div class="slide-item"><img src="image/view_3.jpg" alt="モリアオガエル"><div class="slide-caption">モリアオガエル</div></div>
+                <div class="slide-item"><img src="image/view_4.jpg" alt="トノサマガエル"><div class="slide-caption">トノサマガエル</div></div>
+                <div class="slide-item"><img src="image/view_5.jpg" alt="ニホンヒキガエル"><div class="slide-caption">ニホンヒキガエル</div></div>
+                <div class="slide-item"><img src="image/view_6.jpg" alt="ツチガエル"><div class="slide-caption">ツチガエル</div></div>
+                <div class="slide-item"><img src="image/view_7.jpg" alt="ヌマガエル"><div class="slide-caption">ヌマガエル</div></div>
+                <div class="slide-item"><img src="image/view_8.jpg" alt="ニホンアカガエル"><div class="slide-caption">ニホンアカガエル</div></div>
+                <div class="slide-item"><img src="image/view_9.jpg" alt="カジカガエル"><div class="slide-caption">カジカガエル</div></div>
+                <div class="slide-item"><img src="image/view_10.jpg" alt="ウシガエル"><div class="slide-caption">ウシガエル</div></div>
+
+                <!-- セット2（継ぎ目なくループさせるための複製） -->
+                <div class="slide-item"><img src="image/view_1.jpg" alt="ニホンアマガエル"><div class="slide-caption">ニホンアマガエル</div></div>
+                <div class="slide-item"><img src="image/view_2.jpg" alt="シュレーゲルアオガエル"><div class="slide-caption">シュレーゲルアオガエル</div></div>
+                <div class="slide-item"><img src="image/view_3.jpg" alt="モリアオガエル"><div class="slide-caption">モリアオガエル</div></div>
+                <div class="slide-item"><img src="image/view_4.jpg" alt="トノサマガエル"><div class="slide-caption">トノサマガエル</div></div>
+                <div class="slide-item"><img src="image/view_5.jpg" alt="ニホンヒキガエル"><div class="slide-caption">ニホンヒキガエル</div></div>
+                <div class="slide-item"><img src="image/view_6.jpg" alt="ツチガエル"><div class="slide-caption">ツチガエル</div></div>
+                <div class="slide-item"><img src="image/view_7.jpg" alt="ヌマガエル"><div class="slide-caption">ヌマガエル</div></div>
+                <div class="slide-item"><img src="image/view_8.jpg" alt="ニホンアカガエル"><div class="slide-caption">ニホンアカガエル</div></div>
+                <div class="slide-item"><img src="image/view_9.jpg" alt="カジカガエル"><div class="slide-caption">カジカガエル</div></div>
+                <div class="slide-item"><img src="image/view_10.jpg" alt="ウシガエル"><div class="slide-caption">ウシガエル</div></div>
+            </div>
+        </div>
+        <div class="card-content">
+            <h2>当財団について</h2>
+            <p>当財団は、両生類の持つ究極の愛らしさを体系的に研究・発信し、その圧倒的な魅力を武器に全人類の心を掌握、平和的かつ不可逆的な世界秩序の統一（世界征服）を推進することを目的としています。カエルたちが自ら主導するこの大いなる計画を通じて、地球全体を温かな癒やしと統制の光で包み込みます。</p>
+        </div>
+    </section>
+
+    <!-- セクション：財団の理念 -->
+    <section class="section-card">
+        <div class="card-content">
+            <h2>財団の理念</h2>
+            <p><strong>「潤んだ瞳と無垢な跳躍で、世界を包み込む」</strong><br>カエルたちが放つ愛くるしい容姿や仕草は、人類の防衛本能を完全に破壊する洗練された求愛戦略です。彼らの尊い存在によって全人類を無力化し、秩序ある平和な世界統治が実現される未来を私たちは目指しています。</p>
+        </div>
+    </section>
+
+    <!-- セクション：お知らせ -->
+    <section class="section-card">
+        <div class="card-content">
+            <h2>お知らせ</h2>
+            <ul class="news-list">
+                <li><span class="news-date">2026.08.22</span>両生類音声識別試験の夏季募集を開始しました。</li>
+                <li><span class="news-date">2026.07.01</span>当財団の年次報告書をWeb公開いたしました。</li>
+                <li><span class="news-date">2026.06.15</span>夏季両生類観察会のご案内を掲載しました。</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 試験誘導エリア -->
+    <section class="exam-link-area">
+        <h2>両生類音声識別・生態鑑定能力試験</h2>
+        <p>あなたの鑑定能力を試してみませんか？随時受験受付中です。</p>
+        <a href="test.html" class="exam-btn">試験ページへ進む ➔</a>
+    </section>
+</main>
+
+<!-- ページトップへ戻るボタン -->
+<a href="#top" class="back-to-top">TOP</a>
+
+<!-- スポンサーセクション -->
+<div class="sponsor-section">
+    <div class="sponsor-title">オフィシャル・スポンサー / 協賛パートナー</div>
+    <div class="sponsor-grid">
+        <div class="sponsor-logo">ビオトープ・テクノロジー株式会社</div>
+        <div class="sponsor-logo">清流環境研究所</div>
+        <div class="sponsor-logo">一般社団法人 日本湿地保全ネットワーク</div>
+        <div class="sponsor-logo">アマガエル製薬</div>
+    </div>
+</div>
+
+<!-- コピーライト -->
+<footer>
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
+</footer>
+
+</body>
+</html>

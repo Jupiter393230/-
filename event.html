@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント情報｜一般財団法人 日本両生類学振興財団</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+
+        :root {
+            --jari-deep: #193327;
+            --jari-base: #1f3d2f;
+            --jari-accent: #32634b;
+            --jari-gold: #cfa85d;
+            --jari-gold-light: #f5edd8;
+            --jari-bg: #f7f3e8;
+            --text-main: #193327;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background-color: var(--jari-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(207, 168, 93, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(50, 99, 75, 0.06) 0%, transparent 20%);
+            margin: 0;
+            padding: 0 0 50px 0;
+            color: var(--text-main);
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header { 
+            background: var(--jari-deep); 
+            color: #fff; 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-bottom: 5px solid var(--jari-gold); 
+            width: 100%;
+            box-sizing: border-box;
+        }
+        header a { color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+        header a:hover { opacity: 0.85; }
+        h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
+        .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
+
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 15px 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(5px);
+            flex-wrap: wrap; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--jari-gold);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .nav-btn { 
+            background: var(--jari-deep); 
+            color: var(--jari-gold); 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            border: 2px solid var(--jari-gold); 
+            transition: all 0.3s; 
+            text-align: center; 
+        }
+        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        /* メインコンテンツのコンテナ（中央寄せ） */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 15px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .institute-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(19, 40, 31, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+            max-width: 680px;
+            width: 100%;
+            border: 1px solid rgba(207, 168, 93, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--jari-base);
+            text-align: center;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            padding: 20px 0;
+        }
+
+        .card-body {
+            padding: 36px 28px;
+        }
+
+        .section-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            border-bottom: 2px solid var(--jari-gold);
+            padding-bottom: 6px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "■";
+            font-size: 0.8rem;
+            color: var(--jari-accent);
+        }
+
+        .section-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 32px;
+        }
+
+        .event-card-item {
+            background: var(--jari-gold-light);
+            border: 1px solid rgba(207, 168, 93, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .event-date-badge {
+            display: inline-block;
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .event-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            margin: 0 0 10px 0;
+        }
+
+        .event-details {
+            font-size: 0.88rem;
+            color: #444;
+            margin: 0;
+        }
+
+        .event-details dt {
+            font-weight: 700;
+            color: var(--jari-accent);
+            float: left;
+            width: 5em;
+            clear: left;
+        }
+
+        .event-details dd {
+            margin-left: 5em;
+            margin-bottom: 4px;
+        }
+
+        .back-nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--jari-base);
+        }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <a href="index.html">
+        <h1>日本両生類学振興財団</h1>
+        <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+    </a>
+</header>
+
+<!-- ナビゲーション -->
+<nav>
+    <a href="about.html" class="nav-btn">当財団について</a>
+    <a href="message.html" class="nav-btn">代表挨拶</a>
+    <a href="archive.html" class="nav-btn">資料アーカイブ</a>
+    <a href="event.html" class="nav-btn">イベント情報</a>
+    <a href="friends.html" class="nav-btn">友の会について</a>
+    <a href="inquiry.html" class="nav-btn">お問い合わせ</a>
+</nav>
+
+<div class="main-container">
+    <div class="institute-card">
+        <div class="card-body">
+            
+            <!-- イベント情報セクション -->
+            <h2 class="section-title">主催・共催イベント・観察会</h2>
+            <div class="section-content">
+                <p>当財団では、一般の方向けの観察会から研究者向けのシンポジウムまで、両生類と水辺の自然環境に親しむ各種イベントを開催しております。</p>
+
+                <!-- イベント1 -->
+                <div class="event-card-item">
+                    <span class="event-date-badge">2026.09.12 (土)</span>
+                    <h3 class="event-title">秋季夜間鳴き声調査・観察会「草むらの合唱団を聴く」</h3>
+                    <dl class="event-details">
+                        <dt>開催場所</dt><dd>東京都郊外・武蔵野の湿地帯ビオトープ特設会場</dd>
+                        <dt>講師</dt><dd>当財団 顧問研究員</dd>
+                        <dt>内容</dt><dd>秋口に鳴くカエルや昆虫たちの声を音響機器で採取し、それぞれの種を判別する野外実習を行います。</dd>
+                    </dl>
+                </div>
+
+                <!-- イベント2 -->
+                <div class="event-card-item">
+                    <span class="event-date-badge">2026.10.04 (日)</span>
+                    <h3 class="event-title">特別企画展連携フォーラム「鳥獣戯画に見る平安の水生生物誌」</h3>
+                    <dl class="event-details">
+                        <dt>開催場所</dt><dd>科学振興ビル 4F 講堂（およびオンライン配信）</dd>
+                        <dt>登壇者</dt><dd>戸野佐 麻賀恵瑠（当財団代表理事） 他</dd>
+                        <dt>内容</dt><dd>国宝『鳥獣人物戯画』に描かれた蛙や兎の描写から、当時の京都周辺における生態系と人間の関わりを紐解きます。</dd>
+                    </dl>
+                </div>
+
+                <!-- イベント3 -->
+                <div class="event-card-item">
+                    <span class="event-date-badge">2026.11.23 (月・祝)</span>
+                    <h3 class="event-title">第14回 両生類音声識別・生態鑑定能力試験（秋季検定）</h3>
+                    <dl class="event-details">
+                        <dt>開催場所</dt><dd>オンライン受験システム（全国どこからでも受験可能）</dd>
+                        <dt>対象</dt><dd>初級〜上級鑑定士を目指す一般・研究者の方</dd>
+                        <dt>内容</dt><dd>日本国内に生息する両生類の鳴き声や形態特徴の識別能力を測る認定試験を実施します。</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="back-nav">
+                <a href="index.html" class="back-btn">➔ トップページへ戻る</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="footer-copyright">
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
+</div>
+
+</body>
+</html>

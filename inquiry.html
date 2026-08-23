@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ｜一般財団法人 日本両生類学振興財団</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+
+        :root {
+            --jari-deep: #193327;
+            --jari-base: #1f3d2f;
+            --jari-accent: #32634b;
+            --jari-gold: #cfa85d;
+            --jari-gold-light: #f5edd8;
+            --jari-bg: #f7f3e8;
+            --text-main: #193327;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background-color: var(--jari-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(207, 168, 93, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(50, 99, 75, 0.06) 0%, transparent 20%);
+            margin: 0;
+            padding: 0 0 50px 0;
+            color: var(--text-main);
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header { 
+            background: var(--jari-deep); 
+            color: #fff; 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-bottom: 5px solid var(--jari-gold); 
+            width: 100%;
+            box-sizing: border-box;
+        }
+        header a { color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+        header a:hover { opacity: 0.85; }
+        h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
+        .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
+
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 15px 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(5px);
+            flex-wrap: wrap; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--jari-gold);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .nav-btn { 
+            background: var(--jari-deep); 
+            color: var(--jari-gold); 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            border: 2px solid var(--jari-gold); 
+            transition: all 0.3s; 
+            text-align: center; 
+        }
+        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        /* メインコンテンツのコンテナ（中央寄せ） */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 15px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .institute-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(19, 40, 31, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+            max-width: 680px;
+            width: 100%;
+            border: 1px solid rgba(207, 168, 93, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--jari-base);
+            text-align: center;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            padding: 20px 0;
+        }
+
+        .card-body {
+            padding: 36px 28px;
+        }
+
+        .section-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            border-bottom: 2px solid var(--jari-gold);
+            padding-bottom: 6px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "■";
+            font-size: 0.8rem;
+            color: var(--jari-accent);
+        }
+
+        .section-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 32px;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: var(--jari-deep);
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .form-group label span.required {
+            background: #c0392b;
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid rgba(207, 168, 93, 0.7);
+            border-radius: 6px;
+            background-color: #fdfbf7;
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--jari-accent);
+            box-shadow: 0 0 5px rgba(50, 99, 75, 0.2);
+            background-color: #fff;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .submit-btn {
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            padding: 12px 36px;
+            border: 2px solid var(--jari-gold);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--jari-gold);
+            color: var(--jari-deep);
+            transform: translateY(-2px);
+        }
+
+        .back-nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--jari-base);
+        }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <a href="index.html">
+        <h1>日本両生類学振興財団</h1>
+        <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+    </a>
+</header>
+
+<!-- ナビゲーション -->
+<nav>
+    <a href="about.html" class="nav-btn">当財団について</a>
+    <a href="message.html" class="nav-btn">代表挨拶</a>
+    <a href="archive.html" class="nav-btn">資料アーカイブ</a>
+    <a href="event.html" class="nav-btn">イベント情報</a>
+    <a href="friends.html" class="nav-btn">友の会について</a>
+    <a href="inquiry.html" class="nav-btn">お問い合わせ</a>
+</nav>
+
+<div class="main-container">
+    <div class="institute-card">
+        <div class="card-body">
+            
+            <!-- お問い合わせセクション -->
+            <h2 class="section-title">お問い合わせ・各種ご相談</h2>
+            <div class="section-content">
+                <p>当財団の活動、研究資料、イベント参加、および「両生類友の会」へのご入会に関するお問い合わせは、以下のフォームより承っております。</p>
+
+                <form id="inquiryForm">
+                    <div class="form-group">
+                        <label for="name">お名前 <span class="required">必須</span></label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="例：カエル 太郎" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="furigana">フリガナ <span class="required">必須</span></label>
+                        <input type="text" id="furigana" name="furigana" class="form-control" placeholder="例：かえる たろう" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">メールアドレス <span class="required">必須</span></label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="例：example@domain.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">お問い合わせ種別 <span class="required">必須</span></label>
+                        <select id="category" name="category" class="form-control" required>
+                            <option value="" disabled selected>選択してください</option>
+                            <option value="両生類友の会の入会について">両生類友の会の入会について</option>
+                            <option value="イベント・観察会について">イベント・観察会について</option>
+                            <option value="資料アーカイブ・研究について">資料アーカイブ・研究について</option>
+                            <option value="その他のお問い合わせ">その他のお問い合わせ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">お問い合わせ内容 <span class="required">必須</span></label>
+                        <textarea id="message" name="message" class="form-control" placeholder="お問い合わせの詳細をご記入ください。" required></textarea>
+                    </div>
+
+                    <div class="submit-btn-container">
+                        <button type="submit" id="submitBtn" class="submit-btn">送信する</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="back-nav">
+                <a href="index.html" class="back-btn">➔ トップページへ戻る</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="footer-copyright">
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
+</div>
+
+<script>
+    const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbwQF8gdADQpHCcQHmZWXokkcFOd9LYfhTDoB38qGNzKBMY6qocRKj2KS-Auq29puFdx/exec"; // ←ここに作成したGASのURLを貼り付けてください
+
+    document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = '送信中...';
+
+        const formData = {
+            name: document.getElementById('name').value,
+            furigana: document.getElementById('furigana').value,
+            email: document.getElementById('email').value,
+            category: document.getElementById('category').value,
+            message: document.getElementById('message').value
+        };
+
+        fetch(ENDPOINT_URL, {
+            method: 'POST',
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.result === 'success') {
+                alert('お問い合わせが正常に送信されました。');
+                document.getElementById('inquiryForm').reset();
+            } else {
+                alert('送信に失敗しました。時間をおいて再度お試しください。');
+            }
+            btn.disabled = false;
+            btn.textContent = '送信する';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('通信エラーが発生しました。');
+            btn.disabled = false;
+            btn.textContent = '送信する';
+        });
+    });
+</script>
+
+</body>
+</html>

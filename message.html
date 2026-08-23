@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代表挨拶｜一般財団法人 日本両生類学振興財団</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+
+        :root {
+            --jari-deep: #193327;
+            --jari-base: #1f3d2f;
+            --jari-accent: #32634b;
+            --jari-gold: #cfa85d;
+            --jari-gold-light: #f5edd8;
+            --jari-bg: #f7f3e8;
+            --text-main: #193327;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background-color: var(--jari-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(207, 168, 93, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(50, 99, 75, 0.06) 0%, transparent 20%);
+            margin: 0;
+            padding: 0 0 50px 0;
+            color: var(--text-main);
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 共通ヘッダー・ナビゲーション */
+        header { 
+            background: var(--jari-deep); 
+            color: #fff; 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-bottom: 5px solid var(--jari-gold); 
+            width: 100%;
+            box-sizing: border-box;
+        }
+        header a { color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+        header a:hover { opacity: 0.85; }
+        h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
+        .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
+
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 15px 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(5px);
+            flex-wrap: wrap; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--jari-gold);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .nav-btn { 
+            background: var(--jari-deep); 
+            color: var(--jari-gold); 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            border: 2px solid var(--jari-gold); 
+            transition: all 0.3s; 
+            text-align: center; 
+        }
+        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        /* メインコンテンツのコンテナ（中央寄せ） */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 15px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .institute-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(19, 40, 31, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+            max-width: 680px;
+            width: 100%;
+            border: 1px solid rgba(207, 168, 93, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-body {
+            padding: 36px 28px;
+        }
+
+        /* 代表挨拶レイアウト */
+        .message-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            margin-top: 0;
+            margin-bottom: 24px;
+            text-align: center;
+            line-height: 1.5;
+            border-bottom: 2px solid var(--jari-gold);
+            padding-bottom: 16px;
+        }
+
+        .profile-container {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            margin-bottom: 28px;
+            background: var(--jari-gold-light);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(207, 168, 93, 0.5);
+        }
+
+        .profile-img-placeholder {
+            width: 130px;
+            height: 160px;
+            background-color: var(--jari-base);
+            border: 2px solid var(--jari-gold);
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .profile-img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-role {
+            font-size: 0.82rem;
+            color: var(--jari-accent);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .profile-name {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            margin: 0 0 8px 0;
+        }
+
+        .profile-title {
+            font-size: 0.82rem;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .message-content {
+            font-size: 0.92rem;
+            line-height: 1.9;
+            color: #2c3531;
+        }
+
+        .message-content p {
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            margin-top: 36px;
+            text-align: right;
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+        }
+
+        .back-nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--jari-base);
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--jari-base);
+            text-align: center;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 500px) {
+            .profile-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <a href="index.html">
+        <h1>日本両生類学振興財団</h1>
+        <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+    </a>
+</header>
+
+<!-- ナビゲーション -->
+<nav>
+    <a href="about.html" class="nav-btn">当財団について</a>
+    <a href="message.html" class="nav-btn">代表挨拶</a>
+    <a href="archive.html" class="nav-btn">資料アーカイブ</a>
+    <a href="event.html" class="nav-btn">イベント情報</a>
+    <a href="friends.html" class="nav-btn">友の会について</a>
+    <a href="inquiry.html" class="nav-btn">お問い合わせ</a>
+</nav>
+
+<div class="main-container">
+    <div class="institute-card">
+        <div class="card-body">
+            
+            <h2 class="message-title">代表挨拶<br><span style="font-size: 0.9rem; font-weight: 500; color: var(--jari-accent);">― 悠久の水辺より全人類へ捧ぐ、深遠なるケロニズムの導き ―</span></h2>
+
+            <!-- 代表プロフィール欄 -->
+            <div class="profile-container">
+                <div class="profile-img-placeholder">
+                    <img src="image/face.jpg" alt="代表理事 戸野佐 麻賀恵瑠 近影">
+                </div>
+                <div class="profile-info">
+                    <div class="profile-role">一般財団法人 日本両生類学振興財団 代表理事</div>
+                    <h3 class="profile-name">戸野佐 麻賀恵瑠 <span style="font-size:0.85rem; font-weight: normal;">(とのさ まがえる)</span></h3>
+                    <p class="profile-title">
+                        生態学博士（京都大学大学院 理学研究科修了）<br>
+                        専門：水田生態系保全学、トノサマガエル跳躍生物学。<br>
+                        治承4年（1180年）創立「蛙鳴観察座」より第42代当主。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 本文 -->
+            <div class="message-content">
+                <p>ゲコッ！グワッ、クワックワッ！ケロケロケロゲコッ！</p>
+
+                <p>ケロケロ、ゲコゲコゲコッ。クワッ！グワッグワッ、ケロ……ゲコッ！ケロケロクワッ、ゲコゲコッ！</p>
+
+                <p>ゲコゲコッ！クワックワッ、ケロケロケロ……ッ！グワッ！ゲコッ、ケロケロゲコッ！クワッ、ゲコゲコッ！</p>
+
+                <p>ケロ……ゲコッ！グワッ、クワックワッ！ケロケロケロゲコッ！ゲコゲコ、クワッ！ケロケロケロ……ッ！グワッ！</p>
+
+                <p>グワッグワッ、ケロゲコッ！クワッ！ゲコゲコケロ……クワックワッ。ケロケロゲコッ！</p>
+
+                <p>ゲコッ！ケロケロ、クワックワッ！グワッ！ゲコゲコケロ……クワックワッ！ケロケロゲコッ！</p>
+
+                <div class="signature">
+                    一般財団法人 日本両生類学振興財団<br>
+                    代表理事 戸野佐 麻賀恵瑠
+                </div>
+            </div>
+
+            <div class="back-nav">
+                <a href="index.html" class="back-btn">➔ トップページへ戻る</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="footer-copyright">
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>両生類基本情報データベース｜一般財団法人 日本両生類学振興財団</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+
+        :root {
+            --jari-deep: #193327;
+            --jari-base: #1f3d2f;
+            --jari-accent: #32634b;
+            --jari-gold: #cfa85d;
+            --jari-gold-light: #f5edd8;
+            --jari-bg: #f7f3e8;
+            --text-main: #193327;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background-color: var(--jari-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(207, 168, 93, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(50, 99, 75, 0.06) 0%, transparent 20%);
+            margin: 0;
+            padding: 0 0 50px 0;
+            color: var(--text-main);
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header { 
+            background: var(--jari-deep); 
+            color: #fff; 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-bottom: 5px solid var(--jari-gold); 
+            width: 100%;
+            box-sizing: border-box;
+        }
+        header a { color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+        header a:hover { opacity: 0.85; }
+        h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
+        .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
+
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 15px 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(5px);
+            flex-wrap: wrap; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--jari-gold);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .nav-btn { 
+            background: var(--jari-deep); 
+            color: var(--jari-gold); 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            border: 2px solid var(--jari-gold); 
+            transition: all 0.3s; 
+            text-align: center; 
+        }
+        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 15px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .institute-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(19, 40, 31, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+            max-width: 900px;
+            width: 100%;
+            border: 1px solid rgba(207, 168, 93, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-body {
+            padding: 36px 28px;
+        }
+
+        .section-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            border-bottom: 2px solid var(--jari-gold);
+            padding-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "■";
+            font-size: 0.8rem;
+            color: var(--jari-accent);
+        }
+
+        .intro-container {
+            background: linear-gradient(180deg, #fdfbf7 0%, #f7f2e6 100%);
+            border: 1px solid rgba(207, 168, 93, 0.35);
+            border-radius: 16px;
+            padding: 28px 24px;
+            margin-bottom: 40px;
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.8);
+        }
+
+        .intro-lead {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: var(--jari-deep);
+            margin-top: 0;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed rgba(207, 168, 93, 0.5);
+        }
+
+        .intro-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .intro-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            background: #ffffff;
+            border: 1px solid rgba(207, 168, 93, 0.25);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(25, 51, 39, 0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .intro-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 6px 16px rgba(25, 51, 39, 0.07);
+            border-color: var(--jari-gold);
+        }
+
+        .intro-num {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--jari-gold);
+            line-height: 1;
+            background: var(--jari-deep);
+            padding: 10px 14px;
+            border-radius: 8px;
+            min-width: 32px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .intro-content {
+            flex: 1;
+        }
+
+        .intro-content h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.1rem;
+            color: var(--jari-deep);
+            font-family: 'Shippori Mincho', serif;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+        }
+
+        .intro-content p {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        /* 図鑑リスト */
+        .frog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .frog-card {
+            background: var(--jari-gold-light);
+            border: 1px solid rgba(207, 168, 93, 0.5);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(19, 40, 31, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .frog-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .frog-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(207, 168, 93, 0.4);
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .frog-title-group {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .frog-name {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            margin: 0;
+        }
+
+        .frog-scientific {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .frog-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .frog-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .frog-media {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .frog-img-wrapper {
+            width: 100%;
+            height: 480px; /* 縦幅を伸ばして縦横比を縦長に変更（旧: 320px） */
+            background-color: var(--jari-base);
+            border: 2px solid var(--jari-gold);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .frog-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .frog-audio-box {
+            background: #fff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(207, 168, 93, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .frog-audio-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--jari-accent);
+            white-space: nowrap;
+        }
+
+        .frog-audio-box audio {
+            height: 36px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .frog-info {
+            width: 100%;
+        }
+
+        .frog-info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .frog-info-table th, .frog-info-table td {
+            padding: 9px 12px;
+            border-bottom: 1px solid rgba(207, 168, 93, 0.3);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .frog-info-table th {
+            width: 18%;
+            min-width: 75px;
+            color: var(--jari-deep);
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.5);
+            white-space: nowrap;
+        }
+
+        .frog-info-table td {
+            color: #222;
+            line-height: 1.7;
+        }
+
+        .back-nav {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--jari-base);
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--jari-base);
+            text-align: center;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 650px) {
+            .frog-img-wrapper {
+                height: 320px; /* モバイル表示時の画像エリア高さ調整 */
+            }
+            .frog-audio-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .frog-audio-box audio {
+                width: 100%;
+            }
+            .intro-item {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .intro-num {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <a href="index.html">
+        <h1>日本両生類学振興財団</h1>
+        <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+    </a>
+</header>
+
+<nav>
+    <a href="about.html" class="nav-btn">当財団について</a>
+    <a href="message.html" class="nav-btn">代表挨拶</a>
+    <a href="archive.html" class="nav-btn">資料アーカイブ</a>
+    <a href="event.html" class="nav-btn">イベント情報</a>
+    <a href="friends.html" class="nav-btn">友の会について</a>
+    <a href="inquiry.html" class="nav-btn">お問い合わせ</a>
+</nav>
+
+<div class="main-container">
+    <div class="institute-card">
+        <div class="card-body">
+            
+            <h2 class="section-title">「カエル」という生き物の生態について</h2>
+            <div class="intro-container">
+                <p class="intro-lead">
+                    カエル（無尾目）は、完全水棲の幼生（オタマジャクシ）から半陸棲・陸棲の成体へと劇的な「変態」を遂げる両生類の代表的グループです。水辺と陸上を結ぶ重要な生態系の一員であり、独特の生理構造を持っています。
+                </p>
+                
+                <div class="intro-list">
+                    <div class="intro-item">
+                        <div class="intro-num">01</div>
+                        <div class="intro-content">
+                            <h3>皮膚呼吸と水分吸収</h3>
+                            <p>カエルの皮膚は極めて薄く粘液で常に湿っています。肺呼吸だけでなく、この水分を介して直接ガス交換（皮膚呼吸）を行います。また、口から水を飲むことはほとんどなく、腹部の皮膚から水環境を取り込みます。脱皮した古皮は栄養として自ら食べます。</p>
+                        </div>
+                    </div>
+
+                    <div class="intro-item">
+                        <div class="intro-num">02</div>
+                        <div class="intro-content">
+                            <h3>独特な捕食行動と視覚</h3>
+                            <p>成体は完全な肉食性（昆虫や小動物）です。口の前側に着いた粘着性のある舌を素早く反転伸ばして獲物を捕らえます。獲物を飲み込む際は、巨大な眼球を頭の中に引き込み、口の天井を押し下げることで喉奥へ送り込むという特有の補助動作を行います。</p>
+                        </div>
+                    </div>
+
+                    <div class="intro-item">
+                        <div class="intro-num">03</div>
+                        <div class="intro-content">
+                            <h3>繁殖形態と求愛発声</h3>
+                            <p>オスは「鳴嚢（めいのう）」という膨らむ袋で空気を共鳴させ、大音量の鳴き声を発します。これは縄張り主張やメスへのアピール（抱接）に用いられます。繁殖様式は多岐にわたり、泡状の巣を作る種、地上に集団産卵する種、紐状の卵を産む種などが存在します。</p>
+                        </div>
+                    </div>
+
+                    <div class="intro-item">
+                        <div class="intro-num">04</div>
+                        <div class="intro-content">
+                            <h3>越冬と高い耐寒性</h3>
+                            <p>変温動物であるため、気温が下がる冬期は水底の泥中や地中深くで冬眠します。体液中にグリコーゲンやグリセロールなどの耐寒成分を蓄積することで、体組織の凍結を防ぐすぐれた生理適応能力を備えています。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">国内に分布する主要なカエル図鑑（生息地・写真・鳴き声・生態）</h2>
+            <p style="font-size:0.88rem; color:#555; margin-bottom:20px;">日本国内で観察される主要なカエルの各種データ、生息地域、観察ポイントおよび鳴き声音声アーカイブです。</p>
+
+            <div class="frog-list">
+
+                <!-- ニホンアマガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">ニホンアマガエル</h3>
+                            <span class="frog-scientific">Dryophytes japonicus</span>
+                        </div>
+                        <span class="frog-badge">樹上性・標準種</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/amagaeru.jpg" alt="ニホンアマガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_1.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>日本全国（本州・四国・九州・北海道および周辺離島）、国後島、朝鮮半島、中国東部。平地から低山地の水田、農耕地、庭園、樹林地に広く生息。</td></tr>
+                                <tr><th>外見特徴</th><td>鼻先から目を通って体側へ伸びる鮮やかな黒い帯（アイマスク状の過眼線）と指先の吸盤が目印。背景や湿度で体色を変える。</td></tr>
+                                <tr><th>鳴き声</th><td>「クワクワクワ…」「クッッケッケッ」。雨の前や夜間に大合唱を行う（雨鳴き）。</td></tr>
+                                <tr><th>生態メモ</th><td>指先に円形の吸盤を持ち、草木の葉上やガラス面などの垂直な壁面も容易に登ることができます。体色を緑色・灰色・褐色へと環境に合わせて変色させる能力に優れます。なお、皮膚の粘液には「カリポトキシン」という強い局所刺激毒が含まれており、触れた手で目をこすると激しい痛みを引き起こしたり、傷口に入ると危険なため観察後の手洗いは必須です。気圧や湿度の変化を感じ取って昼間でも鳴き交わす「雨鳴き（レインコール）」の習性が有名です。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- シュレーゲルアオガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">シュレーゲルアオガエル</h3>
+                            <span class="frog-scientific">Zhangixalus schlegelii</span>
+                        </div>
+                        <span class="frog-badge">樹上性・日本固有種</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/schlegel.jpg" alt="シュレーゲルアオガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_4.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>日本固有種（本州、四国、九州、対島、五島列島など）。平地から山地にかけての水田、森林、竹林、湿地に生息。</td></tr>
+                                <tr><th>外見特徴</th><td>全体が鮮やかな気品ある緑色。アマガエルと異なり「目の横の黒い帯」が無い。虹彩は黄色〜赤褐色。</td></tr>
+                                <tr><th>鳴き声</th><td>「タタタタ…」「キキキキ…」と高く澄んだ透き通った連続音。</td></tr>
+                                <tr><th>生態メモ</th><td>見た目はモリアオガエルやアマガエルに似ていますが、過眼線（目横の黒帯）がなく、虹彩が黄色いことで区別されます。学名はオランダの自然史博物館館長シュレーゲルに由来します。繁殖期（4〜6月）になると水田のあぜ道や池の周囲の湿った土の中に穴を掘り、メスが分泌液を泡立てた白い泡状卵塊を産み付けます。土中や草陰に隠れて鳴くため「声はすれども姿は見えず」の代表格です。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- モリアオガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">モリアオガエル</h3>
+                            <span class="frog-scientific">Zhangixalus arboreus</span>
+                        </div>
+                        <span class="frog-badge">樹上性・日本固有種</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/moriao.jpg" alt="モリアオガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_7.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>日本固有種（本州、佐渡島）。山地〜亜高山帯の森林、樹木に囲まれた池沼・水たまり周辺に生息。</td></tr>
+                                <tr><th>外見特徴</th><td>緑色の体に褐色の斑点模様が混ざり（個人差あり）、シュレーゲルより大型。虹彩が赤褐色〜赤色。</td></tr>
+                                <tr><th>鳴き声</th><td>「カラララ…」「コロコロ…」と木の上から水面に響かせる優しい声。</td></tr>
+                                <tr><th>生態メモ</th><td>非繁殖期は標高の高い森林の樹上に生息し、地上に降りてくることは滅多にありません。5月〜7月の繁殖期になると、水面上に覆いかぶさる樹木の枝や葉に集まり、複数のオスとメスが絡み合って泡で包まれた卵塊（泡状卵塊）を作り出します。孵化したオタマジャクシは、雨で崩れた泡とともに真下の水面へ落下して生長します。一部の生息地（岩手県平泉町の毛越寺や福島県など）の繁殖地は国の天然記念物に指定されています。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- トノサマガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">トノサマガエル</h3>
+                            <span class="frog-scientific">Pelophylax nigromaculatus</span>
+                        </div>
+                        <span class="frog-badge">水生・遊泳性</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/tonosama.jpg" alt="トノサマガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_5.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>日本（本州の中部以西、四国、九州の平野部）。水田、湿原、河川敷、池沼などの開放的な水辺環境。</td></tr>
+                                <tr><th>外見特徴</th><td>背中の中心にまっすぐ伸びる一本の黄色〜黄緑の背筋線と、黒い斑点模様。俊敏で長い後ろ足を持つ。</td></tr>
+                                <tr><th>鳴き声</th><td>「グググッ、ゲゲゲッ」「クッカッカッ」と笑い声のような断続的なアクセントのある声。</td></tr>
+                                <tr><th>生態メモ</th><td>強靭な後脚を持ち、跳躍力と水中の遊泳力に極めて長けています。警戒心が強く、人が近づくと「ジャンプして水中に潜り泥を巻き上げて隠れる」行動をとります。繁殖期のオスは全体的に鮮やかな黄緑色〜黄白色を帯びる「婚姻色」を発現させます。近接種であるナゴヤダルマガエルやトウキョウダルマガエルと形態が酷似しており、地域によっては交雑も認められます。近年の水田整備（コンクリート護岸化）等により生息地が減少しつつあります。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ニホンヒキガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">ニホンヒキガエル</h3>
+                            <span class="frog-scientific">Bufo japonicus japonicus</span>
+                        </div>
+                        <span class="frog-badge">大型・陸棲</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/hikigaeru.jpg" alt="ニホンヒキガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_10.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>日本固有亜種（近畿地方以西の本州、四国、九州）。平地から山地の森林、竹林、公園、民家の庭先。</td></tr>
+                                <tr><th>外見特徴</th><td>大型でドッシリとした体格。全身がイボに包まれ、目の後ろに大きな耳下腺（毒腺）を持つ。</td></tr>
+                                <tr><th>鳴き声</th><td>「クックックッ」「キャッキャッ」と小さくひかえめなリリース・コール（嫌がり声）。</td></tr>
+                                <tr><th>生態メモ</th><td>普段は水辺から離れた陸上の薄暗い場所や地面の隙間に生息し、夜間にのそのそと歩いて昆虫やミミズを探します。跳躍力は低く、危険を感じると体を大きく膨らませて威嚇します。目の後ろにある「耳下腺」や皮膚のイボから「ブフォトキシン」という神経毒を含む白く不快な毒液を分泌し、天敵のヘビや哺乳類から身を守ります。早春（2月〜4月）のわずか数日間、普段隠れている成体が池沼や水たまりに一斉に押し寄せ、激しい求愛「蛙合戦（カエルガッセン）」を行って長大なひも状卵塊を産み落とします。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ツチガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">ツチガエル</h3>
+                            <span class="frog-scientific">Glandirana rugosa</span>
+                        </div>
+                        <span class="frog-badge">水生・イボガエル</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/tsuchigaeru.jpg" alt="ツチガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_9.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>日本（本州、四国、九州、佐渡島など）。水田、湿地、流れの緩やかな小川、池沼の周辺。</td></tr>
+                                <tr><th>外見特徴</th><td>全身がサメ肌のように大小の突起イボで覆われた茶褐色の体。お腹側にも灰色〜黒の斑紋がある。</td></tr>
+                                <tr><th>鳴き声</th><td>「ギギギ…」「グゥグゥ…」と低く摩擦音のような声。</td></tr>
+                                <tr><th>生態メモ</th><td>別名「イボガエル」とも呼ばれ、皮膚全体にサメ肌状の多数の小さな突起が存在するのが特徴です。刺激を受けると独特の不快臭（油臭）を放ちます。類似するヌマガエルとの区別は「腹部が真っ白か、斑紋で黒ずんでいるか」で判別できます。最大の特徴として、日本のカエルで唯一「オタマジャクシの状態で水中で冬を越し、翌年春に変態する（越冬幼生）」個体群が一定割合で存在することが挙げられます。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ヌマガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">ヌマガエル</h3>
+                            <span class="frog-scientific">Fejervarya kawamurai</span>
+                        </div>
+                        <span class="frog-badge">水生・小型</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/numagaeru.jpg" alt="ヌマガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_6.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>西日本（東海地方以西の本州、四国、九州、南西諸島）。近年は東日本・関東地方へも外来定着。水田や池沼。</td></tr>
+                                <tr><th>外見特徴</th><td>ツチガエルに酷似するが、突起イボがやや斜め条線状。最大の識別点は「お腹側が真っ白」なこと。</td></tr>
+                                <tr><th>鳴き声</th><td>「キュッキュッ…」「クックックッ…」と高い声で連続して鳴く。</td></tr>
+                                <tr><th>生態メモ</th><td>ツチガエルによく似ていますが、体表の突起がやや縦筋状に並ぶ傾向があり、何よりお腹側が完全な乳白色（無斑）である点で見分けられます。非常に高温に強く、夏の強烈な直射日光で温水と化化した水田でも活発に活動・捕食を行います。近年、国内外の物資輸送に紛れて関東地方や東日本へと生息域を北上・拡大させており、在来生態系への影響が注視されています。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ニホンアカガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">ニホンアカガエル</h3>
+                            <span class="frog-scientific">Rana japonica</span>
+                        </div>
+                        <span class="frog-badge">陸棲・春告げガエル</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/akagaeru.jpg" alt="ニホンアカガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_8.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>日本固有種（本州、四国、九州の平野部〜谷津田、山麓の草地・森林）。</td></tr>
+                                <tr><th>外見特徴</th><td>全体が赤褐色〜橙色。鼓膜周辺にくっきりとした黒い三角の過眼線模様があり、背の折れ線（背側線）がまっすぐ。</td></tr>
+                                <tr><th>鳴き声</th><td>「クッキョ、クッキョ」「キャッキャッ」と水中や水辺で鳴く。</td></tr>
+                                <tr><th>生態メモ</th><td>スマートな体型と長い脚を持つ赤褐色のカエルです。背中両側の線（背側線）が鼓膜の後ろで曲がらず、まっすぐ平行に走る点が近縁のヤマアカガエルとの識別ポイントです。非常に早起きなカエルで、まだ雪や氷が残る1月〜3月の冬の終わりから早春にかけて水田や浅い湿地に一番乗りで集まり、球状の寒天質卵塊を産みます。そのため「春を告げるカエル」と呼ばれます。無農薬水田や谷津田の激減に伴い各地で絶滅危惧種に指定されています。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- カジカガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">カジカガエル</h3>
+                            <span class="frog-scientific">Buergeria buergeri</span>
+                        </div>
+                        <span class="frog-badge">渓流性・清流の歌姫</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/kajika.jpg" alt="カジカガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_3.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>日本固有種（本州、四国、九州、屋久島など）。山地の清流、渓流、河川の上流〜中流域の岩場。</td></tr>
+                                <tr><th>外見特徴</th><td>ゴツゴツした河川の岩肌そっくりの扁平な体色。指先に丸く平らな吸盤を持ち急流に耐える。</td></tr>
+                                <tr><th>鳴き声</th><td>「フィフィフィフィ…」「ピピピピピ…」と鳥のように美しく響く高音。</td></tr>
+                                <tr><th>生態メモ</th><td>日本一美しく鳴く両生類として知られ、その声は野鳥の小参（鹿）になぞらえて「河鹿（カジカ）」の名が冠されました。岩場に溶け込む体色と扁平な体つきを持ち、激しい川の流れに耐えるため指先には吸盤が発達しています。河川の大きな岩の上に縄張りを作り、清らかな美声で鳴き合います。江戸時代には「河鹿籠（かじかかご）」と呼ばれる専用の竹籠に入れてその美声を楽しむ河鹿飼育の文化が存在しました。河川改修や水質汚濁に弱いため環境指標種とされます。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ウシガエル -->
+                <div class="frog-card">
+                    <div class="frog-header">
+                        <div class="frog-title-group">
+                            <h3 class="frog-name">ウシガエル</h3>
+                            <span class="frog-scientific">Lithobates catesbeianus</span>
+                        </div>
+                        <span class="frog-badge">特定外来生物・超大型</span>
+                    </div>
+                    <div class="frog-content">
+                        <div class="frog-media">
+                            <div class="frog-img-wrapper">
+                                <img src="image/ushigaeru.jpg" alt="ウシガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                            </div>
+                            <div class="frog-audio-box">
+                                <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
+                                <audio controls src="image/voice_2.mp3"></audio>
+                            </div>
+                        </div>
+                        <div class="frog-info">
+                            <table class="frog-info-table">
+                                <tr><th>生息地</th><td>北アメリカ原産（日本全国の池沼、河川敷、ダム湖、水田の用水路に外来種として広く定着）。</td></tr>
+                                <tr><th>外見特徴</th><td>日本最大級の超大型カエル（成体15cm以上）。目のすぐ後ろに目より巨大な丸い鼓膜を持つ。</td></tr>
+                                <tr><th>鳴き声</th><td>「モー、モー」「ボォー、ボォー」と牛の鳴き声のような太く重い低音。</td></tr>
+                                <tr><th>生態メモ</th><td>大正時代に食用目的（食用ガエル）でアメリカから輸入され、その後野外へ逃げ出して全国へ定着しました。成体は体長20cm近くに達し、口に入る大きさであれば昆虫だけでなく、小型の魚類、蛇、ネズミ、小鳥、他の両生類までも貪欲に飲み込んで捕食します。強い警戒心を持ち、接近すると水中に飛び込んで潜伏します。在来生態系へ重大な悪影響を与えるため「特定外来生物」に指定されており、生きたままの移動、飼育、野外への放出が法律で厳重に禁止されています。</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="back-nav">
+                <a href="archive.html" class="back-btn">➔ 資料アーカイブへ戻る</a>
+                <a href="index.html" class="back-btn" style="margin-left: 10px;">➔ トップページへ戻る</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="footer-copyright">
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
+</div>
+
+</body>
+</html>

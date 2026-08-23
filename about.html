@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>当財団について｜一般財団法人 日本両生類学振興財団</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+
+        :root {
+            --jari-deep: #193327;
+            --jari-base: #1f3d2f;
+            --jari-accent: #32634b;
+            --jari-gold: #cfa85d;
+            --jari-gold-light: #f5edd8;
+            --jari-bg: #f7f3e8;
+            --text-main: #193327;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background-color: var(--jari-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(207, 168, 93, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(50, 99, 75, 0.06) 0%, transparent 20%);
+            margin: 0;
+            padding: 0 0 50px 0;
+            color: var(--text-main);
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header { 
+            background: var(--jari-deep); 
+            color: #fff; 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-bottom: 5px solid var(--jari-gold); 
+            width: 100%;
+            box-sizing: border-box;
+        }
+        header a { color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+        header a:hover { opacity: 0.85; }
+        h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
+        .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
+
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 15px 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(5px);
+            flex-wrap: wrap; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--jari-gold);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .nav-btn { 
+            background: var(--jari-deep); 
+            color: var(--jari-gold); 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            border: 2px solid var(--jari-gold); 
+            transition: all 0.3s; 
+            text-align: center; 
+        }
+        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        /* メインコンテンツのコンテナ（中央寄せ） */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 15px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .institute-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(19, 40, 31, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+            max-width: 680px;
+            width: 100%;
+            border: 1px solid rgba(207, 168, 93, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--jari-base);
+            text-align: center;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            padding: 20px 0;
+        }
+
+        .card-body {
+            padding: 28px 24px;
+        }
+
+        .section-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            border-bottom: 2px solid var(--jari-gold);
+            padding-bottom: 6px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "■";
+            font-size: 0.8rem;
+            color: var(--jari-accent);
+        }
+
+        .section-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 32px;
+        }
+
+        .section-content p {
+            margin: 0 0 12px 0;
+        }
+
+        .philosophy-box {
+            background-color: var(--jari-gold-light);
+            border-left: 4px solid var(--jari-gold);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            line-height: 1.6;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .info-table th, .info-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e0e8e3;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .info-table th {
+            width: 28%;
+            background-color: #f2f7f4;
+            color: var(--jari-deep);
+            font-weight: 700;
+            border-right: 2px solid var(--jari-accent);
+        }
+
+        .info-table td {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .history-timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid #d1dcd5;
+            margin-left: 8px;
+        }
+
+        .history-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .history-item::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--jari-accent);
+            border: 2px solid #fff;
+        }
+
+        .history-date {
+            font-weight: 700;
+            color: var(--jari-accent);
+            font-size: 0.85rem;
+            margin-bottom: 2px;
+        }
+
+        .history-desc {
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .back-nav {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--jari-base);
+        }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <a href="index.html">
+        <h1>日本両生類学振興財団</h1>
+        <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+    </a>
+</header>
+
+<nav>
+    <a href="about.html" class="nav-btn">当財団について</a>
+    <a href="message.html" class="nav-btn">代表挨拶</a>
+    <a href="archive.html" class="nav-btn">資料アーカイブ</a>
+    <a href="event.html" class="nav-btn">イベント情報</a>
+    <a href="friends.html" class="nav-btn">友の会について</a>
+    <a href="inquiry.html" class="nav-btn">お問い合わせ</a>
+</nav>
+
+<div class="main-container">
+    <div class="institute-card">
+        <div class="card-body">
+            
+            <!-- 理念と設立の経緯 -->
+            <h2 class="section-title">理念と設立の経緯</h2>
+            <div class="section-content">
+                <div class="philosophy-box">
+                    「両生類の持つ究極的な愛らしさを全人類に浸透させ、その魅惑をもって世界秩序を統合・征服する。」
+                </div>
+                <p>両生類は、その洗練されたフォルムや愛嬌のある挙動を通じて、人類の防衛本能を解除し、精神的優位性を確立するための高度な適応戦略を有しています。当財団は、カエルが自らの「可愛さ」を戦略的武器として活用し、平和的かつ不可逆的に世界を征服・統括していくための基盤組織として設立されました。</p>
+                <p>その起源は治承4年（1180年）に高山寺周辺で結成された「蛙鳴観察座」に遡ります。当時から彼らは、人間社会の懐に巧みに入り込み、「可愛い」という感情を介して人心を掌握する布石を打ってきました。私たちはこの伝統的なアプローチを現代の学術研究および普及活動に継承し、世界征服という大望の完遂に向けて日夜活動を続けています。</p>
+            </div>
+
+            <!-- 財団概要 -->
+            <h2 class="section-title">法人概要</h2>
+            <div class="section-content">
+                <table class="info-table">
+                    <tr>
+                        <th>名称</th>
+                        <td>一般財団法人 日本両生類学振興財団<br><span style="font-size:0.75rem; color:#666;">(Japan Association for Amphibian Science)</span></td>
+                    </tr>
+                    <tr>
+                        <th>創立</th>
+                        <td>1180年（治承4年5月）<br><span style="font-size:0.75rem; color:#666;">※2018年に一般財団法人へ移行登記</span></td>
+                    </tr>
+                    <tr>
+                        <th>事業内容</th>
+                        <td>
+                            ・カエルの可愛さに関する定量的・定性的な生態研究およびビジュアルの最大化<br>
+                            ・人類の心をメロメロにするための音声モニタリングおよび普及啓発活動<br>
+                            ・『鳥獣戯画』等に見る、過去の懐柔工作の歴史的検証と資料のアーカイブ化<br>
+                            ・地球規模でのカエル優位型生態系ネットワークの構築事業
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>所在地</th>
+                        <td>〒101-0051 東京都千代田区神田神保町2-14-10 科学振興ビル4F</td>
+                    </tr>
+                    <tr>
+                        <th>役員・組織</th>
+                        <td>代表理事：戸野佐 麻賀恵瑠（生態学博士）<br>理事：8名 / 監事：2名 / 顧問研究員：12名</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 沿革 -->
+            <h2 class="section-title">沿革</h2>
+            <div class="section-content">
+                <div class="history-timeline">
+                    <div class="history-item">
+                        <div class="history-date">1180年（治承4年）</div>
+                        <div class="history-desc">京都の清流にて、カエルの可愛さによる天下掌握を目指す「蛙鳴観察座」が創立される。</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-date">1788年（天明8年）</div>
+                        <div class="history-desc">『両生本草図譜』を編纂し、国内におけるカエル心酔者の拡大基盤を構築。</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-date">1924年（大正13年）</div>
+                        <div class="history-desc">民間研究助成組織「日本両生類保護普及会」へ改称し、社会的なカモフラージュを強化。</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-date">2018年（平成30年）</div>
+                        <div class="history-desc">「一般財団法人 日本両生類学振興財団」として法人化。組織を近代化し、世界征服への体制を整える。</div>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-date">2026年（令和8年）</div>
+                        <div class="history-desc">創立846周年を迎え、全人類のメロメロ化を完了させる最終フェーズの作戦を執行中。</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back-nav">
+                <a href="index.html" class="back-btn">➔ トップページへ戻る</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="footer-copyright">
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
+</div>
+
+</body>
+</html>
