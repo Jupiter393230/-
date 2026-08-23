@@ -127,14 +127,14 @@
             background-color: var(--jari-base);
             border: 2px solid var(--jari-gold);
             border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--jari-gold);
-            font-size: 0.8rem;
+            overflow: hidden;
             flex-shrink: 0;
-            text-align: center;
+        }
+
+        .profile-img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .profile-info {
@@ -248,8 +248,7 @@
         <!-- 代表プロフィール欄 -->
         <div class="profile-container">
             <div class="profile-img-placeholder">
-                <span style="font-size:1.8rem; margin-bottom: 4px;">🐸</span>
-                <span>代表近影</span>
+                <img src="image/face.jpg" alt="代表理事 戸野佐 麻賀恵瑠 近影">
             </div>
             <div class="profile-info">
                 <div class="profile-role">一般財団法人 日本両生類学振興財団 代表理事</div>
@@ -262,23 +261,23 @@
             </div>
         </div>
 
-        <!-- 本文（挨拶の文面のみ完全なカエル語） -->
+        <!-- 本文 -->
         <div class="message-content">
-            <p>ゲコッ！グワッ、クワックワッ！ケロケロケロゲコッ！[cite: 17]</p>
+            <p>ゲコッ！グワッ、クワックワッ！ケロケロケロゲコッ！</p>
 
-            <p>ケロケロ、ゲコゲコゲコッ。クワッ！グワッグワッ、ケロ……ゲコッ！ケロケロクワッ、ゲコゲコッ！[cite: 17]</p>
+            <p>ケロケロ、ゲコゲコゲコッ。クワッ！グワッグワッ、ケロ……ゲコッ！ケロケロクワッ、ゲコゲコッ！</p>
 
-            <p>ゲコゲコッ！クワックワッ、ケロケロケロ……ッ！グワッ！ゲコッ、ケロケロゲコッ！クワッ、ゲコゲコッ！[cite: 17]</p>
+            <p>ゲコゲコッ！クワックワッ、ケロケロケロ……ッ！グワッ！ゲコッ、ケロケロゲコッ！クワッ、ゲコゲコッ！</p>
 
-            <p>ケロ……ゲコッ！グワッ、クワックワッ！ケロケロケロゲコッ！ゲコゲコ、クワッ！ケロケロケロ……ッ！グワッ！[cite: 17]</p>
+            <p>ケロ……ゲコッ！グワッ、クワックワッ！ケロケロケロゲコッ！ゲコゲコ、クワッ！ケロケロケロ……ッ！グワッ！</p>
 
-            <p>グワッグワッ、ケロゲコッ！クワッ！ゲコゲコケロ……クワックワッ。ケロケロゲコッ！[cite: 17]</p>
+            <p>グワッグワッ、ケロゲコッ！クワッ！ゲコゲコケロ……クワックワッ。ケロケロゲコッ！</p>
 
-            <p>ゲコッ！ケロケロ、クワックワッ！グワッ！ゲコゲコケロ……クワックワッ！ケロケロゲコッ！[cite: 17]</p>
+            <p>ゲコッ！ケロケロ、クワックワッ！グワッ！ゲコゲコケロ……クワックワッ！ケロケロゲコッ！</p>
 
             <div class="signature">
                 一般財団法人 日本両生類学振興財団<br>
-                代表理事 戸野佐 麻賀恵瑠[cite: 17]
+                代表理事 戸野佐 麻賀恵瑠
             </div>
         </div>
 
@@ -290,7 +289,7 @@
 </div>
 
 <div class="footer-copyright">
-    &copy; Japan Association for Amphibian Science. All Rights Reserved.[cite: 17]
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
 </div>
 
 </body>
