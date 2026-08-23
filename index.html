@@ -14,21 +14,93 @@
             --text-main: #1a221e;
         }
 
-        body { font-family: 'Zen Kaku Gothic New', sans-serif; background-color: var(--jari-bg); color: var(--text-main); margin: 0; line-height: 1.6; }
+        body { font-family: 'Zen Kaku Gothic New', sans-serif; background-color: var(--jari-bg); color: var(--text-main); margin: 0; line-height: 1.6; scroll-behavior: smooth; }
 
         header { background: var(--jari-deep); color: #fff; padding: 50px 20px; text-align: center; border-bottom: 5px solid var(--jari-gold); }
+        header a { color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+        header a:hover { opacity: 0.85; }
         h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
         .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
 
-        nav { display: flex; justify-content: center; gap: 15px; padding: 30px 20px; background: #fff; flex-wrap: wrap; }
-        .nav-btn { background: var(--jari-deep); color: var(--jari-gold); padding: 20px 30px; text-decoration: none; border-radius: 8px; font-weight: 900; font-size: 1.1rem; border: 2px solid var(--jari-gold); transition: all 0.3s; min-width: 140px; text-align: center; }
-        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-3px); }
+        /* 上部固定ナビゲーション */
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 15px 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(5px);
+            flex-wrap: wrap; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--jari-gold);
+        }
+        .nav-btn { 
+            background: var(--jari-deep); 
+            color: var(--jari-gold); 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            border: 2px solid var(--jari-gold); 
+            transition: all 0.3s; 
+            text-align: center; 
+        }
+        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
 
         main { max-width: 800px; margin: 40px auto; padding: 0 20px; }
 
         .section-card { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid rgba(207, 168, 93, 0.2); margin-bottom: 30px; overflow: hidden; }
         .card-content { padding: 30px; }
-        .frog-img-box { width: 100%; height: 200px; background: #d1dcd5; display: flex; align-items: center; justify-content: center; color: #55665d; font-weight: 700; border-bottom: 3px solid var(--jari-gold); }
+
+        /* カエル写真スライドショーエリア（全10種対応） */
+        .frog-slider-box {
+            width: 100%;
+            height: 220px;
+            background: #13281f;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--jari-gold);
+        }
+        .slider-track {
+            display: flex;
+            width: calc(250px * 20); /* 10枚×2セット分 */
+            animation: scrollSlider 40s linear infinite;
+            height: 100%;
+        }
+        .slide-item {
+            width: 250px;
+            height: 100%;
+            flex-shrink: 0;
+            position: relative;
+            border-right: 2px solid var(--jari-gold);
+            background: #1a221e;
+        }
+        .slide-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: rgba(19, 40, 31, 0.85);
+            color: var(--jari-gold);
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 0;
+        }
+        @keyframes scrollSlider {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 10)); }
+        }
         
         h2 { border-left: 5px solid var(--jari-gold); padding-left: 15px; color: var(--jari-deep); margin-top: 0; }
 
@@ -39,29 +111,136 @@
         .exam-link-area { text-align: center; padding: 50px 20px; background: var(--jari-deep); color: #fff; border-radius: 12px; margin-top: 40px; border: 2px solid var(--jari-gold); }
         .exam-btn { display: inline-block; background: var(--jari-gold); color: var(--jari-deep); padding: 22px 60px; text-decoration: none; border-radius: 50px; font-weight: 900; font-size: 1.3rem; margin-top: 25px; transition: 0.3s; }
         .exam-btn:hover { background: #fff; transform: scale(1.05); }
+
+        /* ページトップへ戻るボタン */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.85rem;
+            border: 2px solid var(--jari-gold);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            z-index: 999;
+        }
+        .back-to-top:hover {
+            background: var(--jari-gold);
+            color: var(--jari-deep);
+            transform: translateY(-4px);
+        }
+
+        /* スポンサー欄 */
+        .sponsor-section {
+            margin-top: 60px;
+            padding: 30px 20px;
+            background: #f0ebe0;
+            border-top: 2px solid rgba(207, 168, 93, 0.4);
+            text-align: center;
+        }
+        .sponsor-title {
+            font-size: 0.9rem;
+            color: var(--jari-deep);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+        }
+        .sponsor-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .sponsor-logo {
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #555;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        /* コピーライト */
+        footer {
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>日本両生類学振興財団</h1>
-    <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+<header id="top">
+    <a href="#top">
+        <h1>日本両生類学振興財団</h1>
+        <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+    </a>
 </header>
 
+<!-- スクロールしても固定されるナビゲーション -->
 <nav>
-    <a href="#" class="nav-btn">財団について</a>
-    <a href="#" class="nav-btn">代表挨拶</a>
-    <a href="#" class="nav-btn">両生類図鑑</a>
-    <a href="#" class="nav-btn">イベント情報</a>
+    <a href="#about" class="nav-btn">当財団について</a>
+    <a href="#greeting" class="nav-btn">代表挨拶</a>
+    <a href="#archive" class="nav-btn">資料アーカイブ</a>
+    <a href="#event" class="nav-btn">イベント情報</a>
 </nav>
 
 <main>
-    <!-- セクション：財団紹介 -->
-    <section class="section-card">
-        <div class="frog-img-box">【財団イメージ写真】</div>
+    <!-- セクション：財団紹介（全10種カエル写真スライドショー付き） -->
+    <section class="section-card" id="about">
+        <div class="frog-slider-box">
+            <div class="slider-track">
+                <!-- セット1（view_1 〜 view_10） -->
+                <div class="slide-item"><img src="image/view_1.jpg" alt="ニホンアマガエル"><div class="slide-caption">ニホンアマガエル</div></div>
+                <div class="slide-item"><img src="image/view_2.jpg" alt="シュレーゲルアオガエル"><div class="slide-caption">シュレーゲルアオガエル</div></div>
+                <div class="slide-item"><img src="image/view_3.jpg" alt="モリアオガエル"><div class="slide-caption">モリアオガエル</div></div>
+                <div class="slide-item"><img src="image/view_4.jpg" alt="トノサマガエル"><div class="slide-caption">トノサマガエル</div></div>
+                <div class="slide-item"><img src="image/view_5.jpg" alt="ニホンヒキガエル"><div class="slide-caption">ニホンヒキガエル</div></div>
+                <div class="slide-item"><img src="image/view_6.jpg" alt="ツチガエル"><div class="slide-caption">ツチガエル</div></div>
+                <div class="slide-item"><img src="image/view_7.jpg" alt="ヌマガエル"><div class="slide-caption">ヌマガエル</div></div>
+                <div class="slide-item"><img src="image/view_8.jpg" alt="ニホンアカガエル"><div class="slide-caption">ニホンアカガエル</div></div>
+                <div class="slide-item"><img src="image/view_9.jpg" alt="カジカガエル"><div class="slide-caption">カジカガエル</div></div>
+                <div class="slide-item"><img src="image/view_10.jpg" alt="ウシガエル"><div class="slide-caption">ウシガエル</div></div>
+
+                <!-- セット2（継ぎ目なくループさせるための複製） -->
+                <div class="slide-item"><img src="image/view_1.jpg" alt="ニホンアマガエル"><div class="slide-caption">ニホンアマガエル</div></div>
+                <div class="slide-item"><img src="image/view_2.jpg" alt="シュレーゲルアオガエル"><div class="slide-caption">シュレーゲルアオガエル</div></div>
+                <div class="slide-item"><img src="image/view_3.jpg" alt="モリアオガエル"><div class="slide-caption">モリアオガエル</div></div>
+                <div class="slide-item"><img src="image/view_4.jpg" alt="トノサマガエル"><div class="slide-caption">トノサマガエル</div></div>
+                <div class="slide-item"><img src="image/view_5.jpg" alt="ニホンヒキガエル"><div class="slide-caption">ニホンヒキガエル</div></div>
+                <div class="slide-item"><img src="image/view_6.jpg" alt="ツチガエル"><div class="slide-caption">ツチガエル</div></div>
+                <div class="slide-item"><img src="image/view_7.jpg" alt="ヌマガエル"><div class="slide-caption">ヌマガエル</div></div>
+                <div class="slide-item"><img src="image/view_8.jpg" alt="ニホンアカガエル"><div class="slide-caption">ニホンアカガエル</div></div>
+                <div class="slide-item"><img src="image/view_9.jpg" alt="カジカガエル"><div class="slide-caption">カジカガエル</div></div>
+                <div class="slide-item"><img src="image/view_10.jpg" alt="ウシガエル"><div class="slide-caption">ウシガエル</div></div>
+            </div>
+        </div>
         <div class="card-content">
-            <h2>財団について</h2>
+            <h2>当財団について</h2>
             <p>当財団は、両生類の保護、生態研究、および普及啓発活動を通じて、自然環境の保全と両生類学の振興に寄与することを目的としています。</p>
+        </div>
+    </section>
+
+    <!-- セクション：財団の理念 -->
+    <section class="section-card">
+        <div class="card-content">
+            <h2>財団の理念</h2>
+            <p><strong>「清流と湿潤の息吹を未来へ」</strong><br>カエルをはじめとする両生類は、環境の変化に最も敏感な「環境指標生物」です。彼らの声が響く豊かな自然を守り続けることが、巡り巡って人類の持続可能な未来を形作ると私たちは信じています。</p>
         </div>
     </section>
 
@@ -84,6 +263,25 @@
         <a href="test.html" class="exam-btn">試験ページへ進む ➔</a>
     </section>
 </main>
+
+<!-- ページトップへ戻るボタン -->
+<a href="#top" class="back-to-top">TOP</a>
+
+<!-- スポンサーセクション -->
+<div class="sponsor-section">
+    <div class="sponsor-title">オフィシャル・スポンサー / 協賛パートナー</div>
+    <div class="sponsor-grid">
+        <div class="sponsor-logo">ビオトープ・テクノロジー株式会社</div>
+        <div class="sponsor-logo">清流環境研究所</div>
+        <div class="sponsor-logo">一般社団法人 日本湿地保全ネットワーク</div>
+        <div class="sponsor-logo">アマガエル製薬</div>
+    </div>
+</div>
+
+<!-- コピーライト -->
+<footer>
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
+</footer>
 
 </body>
 </html>
