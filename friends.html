@@ -46,6 +46,7 @@
         h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
         .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
 
+        /* 上部固定ナビゲーション（PC用基本スタイル） */
         nav { 
             display: flex; 
             justify-content: center; 
@@ -73,8 +74,40 @@
             border: 2px solid var(--jari-gold); 
             transition: all 0.3s; 
             text-align: center; 
+            box-sizing: border-box;
         }
         .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        /* ★ スマホ向けレスポンシブ対応（隙間なし・画面上部完全固定） ★ */
+        @media (max-width: 768px) {
+            nav {
+                position: sticky; /* スクロール追従固定 */
+                top: 0;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); /* 3列ぴったり均等割 */
+                gap: 0; /* 隙間を完全ゼロに */
+                padding: 0;
+                background: var(--jari-deep);
+                border-bottom: 2px solid var(--jari-gold);
+            }
+            .nav-btn {
+                padding: 10px 2px;
+                font-size: 0.75rem;
+                letter-spacing: -0.03em;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                white-space: normal;
+                border-radius: 0; /* 四角くして密着させる */
+                border: 1px solid rgba(207, 168, 93, 0.4); /* ボタン間の仕切り線 */
+                margin: 0;
+            }
+            .nav-btn:hover {
+                transform: none; /* スマホ固定時は浮き上がりアニメーションをオフ */
+            }
+        }
 
         /* メインコンテンツのコンテナ（中央寄せ） */
         .main-container {
