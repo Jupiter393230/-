@@ -22,7 +22,7 @@
         h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
         .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
 
-        /* 上部固定ナビゲーション */
+        /* 上部固定ナビゲーション（PC用基本スタイル） */
         nav { 
             display: flex; 
             justify-content: center; 
@@ -48,8 +48,27 @@
             border: 2px solid var(--jari-gold); 
             transition: all 0.3s; 
             text-align: center; 
+            white-space: nowrap;
         }
         .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        /* ★ スマホ向けレスポンシブ対応 ★ */
+        @media (max-width: 768px) {
+            nav {
+                position: relative; /* 固定解除で画面圧迫を防止 */
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto; /* 横スクロール対応 */
+                -webkit-overflow-scrolling: touch;
+                padding: 12px 15px;
+                gap: 10px;
+            }
+            .nav-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+                flex-shrink: 0; /* 折り返し防止 */
+            }
+        }
 
         main { max-width: 800px; margin: 40px auto; padding: 0 20px; }
 
