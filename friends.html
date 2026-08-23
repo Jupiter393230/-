@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>友の会について｜一般財団法人 日本両生類学振興財団</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+
+        :root {
+            --jari-deep: #13281f;
+            --jari-base: #1f3d2f;
+            --jari-accent: #32634b;
+            --jari-gold: #cfa85d;
+            --jari-gold-light: #f5edd8;
+            --jari-bg: #f7f3e8;
+            --text-main: #1a221e;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background-color: var(--jari-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(207, 168, 93, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(50, 99, 75, 0.06) 0%, transparent 20%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-main);
+            padding: 20px 10px;
+            box-sizing: border-box;
+        }
+
+        header { 
+            background: var(--jari-deep); 
+            color: #fff; 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-bottom: 5px solid var(--jari-gold); 
+            width: 100%;
+            box-sizing: border-box;
+        }
+        header a { color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+        header a:hover { opacity: 0.85; }
+        h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
+        .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
+
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 15px 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(5px);
+            flex-wrap: wrap; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--jari-gold);
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+        .nav-btn { 
+            background: var(--jari-deep); 
+            color: var(--jari-gold); 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            border: 2px solid var(--jari-gold); 
+            transition: all 0.3s; 
+            text-align: center; 
+        }
+        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        .institute-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(19, 40, 31, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+            max-width: 680px;
+            width: 100%;
+            border: 1px solid rgba(207, 168, 93, 0.35);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--jari-base);
+            text-align: center;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        .card-body {
+            padding: 36px 28px;
+        }
+
+        .section-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            border-bottom: 2px solid var(--jari-gold);
+            padding-bottom: 6px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "■";
+            font-size: 0.8rem;
+            color: var(--jari-accent);
+        }
+
+        .section-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 32px;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .activity-item {
+            background: #faf7f0;
+            border-left: 4px solid var(--jari-accent);
+            padding: 14px 18px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .activity-item h4 {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1rem;
+            color: var(--jari-deep);
+            margin: 0 0 6px 0;
+        }
+
+        .activity-item p {
+            font-size: 0.85rem;
+            color: #555;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .report-card-item {
+            background: #fdfbf7;
+            border: 1px dashed rgba(207, 168, 93, 0.7);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+        }
+
+        .report-date-badge {
+            display: inline-block;
+            background: var(--jari-accent);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+
+        .report-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            margin: 0 0 6px 0;
+        }
+
+        .report-desc {
+            font-size: 0.85rem;
+            color: #555;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .plan-box {
+            background: var(--jari-gold-light);
+            border: 1px solid rgba(207, 168, 93, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .plan-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            margin: 0 0 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .plan-price {
+            font-size: 0.85rem;
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            padding: 3px 10px;
+            border-radius: 4px;
+        }
+
+        .plan-desc {
+            font-size: 0.88rem;
+            color: #444;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .back-nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--jari-base);
+        }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <a href="index.html">
+        <h1>日本両生類学振興財団</h1>
+        <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+    </a>
+</header>
+
+<!-- ナビゲーション -->
+<nav>
+    <a href="about.html" class="nav-btn">当財団について</a>
+    <a href="message.html" class="nav-btn">代表挨拶</a>
+    <a href="archive.html" class="nav-btn">資料アーカイブ</a>
+    <a href="event.html" class="nav-btn">イベント情報</a>
+    <a href="friends.html" class="nav-btn">友の会について</a>
+    <a href="inquiry.html" class="nav-btn">お問い合わせ</a>
+</nav>
+
+<div class="institute-card">
+    <div class="card-body">
+        
+        <!-- 友の会についてセクション -->
+        <h2 class="section-title">財団公式ファンクラブ「両生類友の会」のご案内</h2>
+        <div class="section-content">
+            <p>日本両生類学振興財団では、カエルやサンショウウオをはじめとする両生類の生態系を守り、その魅力を広く普及・研究するための会員組織「両生類友の会」を運営しております。</p>
+            <p>研究者や愛好家の垣根を越えて自然科学に親しみ、次世代へ水辺の豊かな環境を継承するため、会員の皆様とともに様々な活動に取り組んでいます。</p>
+
+            <!-- 活動内容の紹介 -->
+            <h3 class="section-title" style="font-size: 1.1rem; margin-top: 24px;">主な活動内容</h3>
+            <div class="activity-grid">
+                <div class="activity-item">
+                    <h4>1. 夜間鳴き声調査・フィールドワーク</h4>
+                    <p>各地の湿地帯やビオトープに赴き、音響機器を用いた生息種のモニタリングや鳴き声のデータ収集を行います。</p>
+                </div>
+                <div class="activity-item">
+                    <h4>2. 平安水生生物誌・歴史文化研究</h4>
+                    <p>国宝『鳥獣人物戯画』をはじめとする古典絵画や古文書に描かれた、水生生物に関する歴史的背景や文化的変遷を紐解きます。</p>
+                </div>
+                <div class="activity-item">
+                    <h4>3. 保全啓発イベント・検定の開催</h4>
+                    <p>一般向けの観察会や、両生類の音声識別・生態鑑定能力を測る認定試験などを主催し、普及啓発活動に努めています。</p>
+                </div>
+            </div>
+
+            <!-- 過去のイベント実施報告 -->
+            <h3 class="section-title" style="font-size: 1.1rem; margin-top: 24px;">過去のイベント実施報告</h3>
+            
+            <div class="report-card-item">
+                <span class="report-date-badge">2026.06.18 実施</span>
+                <h4 class="report-title">初夏トノサマガエル跳躍力・生息環境調査</h4>
+                <p class="report-desc">
+                    会員の皆様と近郊の水田地域にて、トノサマガエルの個体数調査および跳躍データの計測を実施しました。あいにくの小雨模様でしたが、活発な鳴き声に包まれながら充実したフィールドワークとなりました。
+                </p>
+            </div>
+
+            <div class="report-card-item">
+                <span class="report-date-badge">2026.04.25 実施</span>
+                <h4 class="report-title">春季特別講演会「古典に息づくカエルたち」</h4>
+                <p class="report-desc">
+                    代表理事・戸野佐麻賀恵瑠による、平安・鎌倉時代の絵画における両生類の描かれ方についての特別講演を開催。オンライン参加を含め多くの会員の方にご聴講いただき、活発な質疑応答が行われました。
+                </p>
+            </div>
+
+            <!-- 会員プランのご紹介 -->
+            <h3 class="section-title" style="font-size: 1.1rem; margin-top: 24px;">会員プラン・特典のご案内</h3>
+
+            <!-- プラン1 -->
+            <div class="plan-box">
+                <div class="plan-title">
+                    <span>レギュラー会員（一般）</span>
+                    <span class="plan-price">年会費 5,000円</span>
+                </div>
+                <p class="plan-desc">
+                    ・機関誌『両生類通信』（年4回発行）のご自宅への郵送<br>
+                    ・当財団主催の観察会・イベントの先行予約権および参加費割引<br>
+                    ・オリジナルデザイン「鳥獣戯画・蛙クリアファイル」進呈
+                </p>
+            </div>
+
+            <!-- プラン2 -->
+            <div class="plan-box">
+                <div class="plan-title">
+                    <span>プレミアム水脈（みお）会員</span>
+                    <span class="plan-price">年会費 12,000円</span>
+                </div>
+                <p class="plan-desc">
+                    ・レギュラー会員の全特典に加え、年1回開催される「代表理事・戸野佐麻賀恵瑠と行く極秘夜間鳴き声調査ツアー」への優先招待<br>
+                    ・特製音声解析シミュレータアプリのプレミアム機能利用権<br>
+                    ・特別限定記念グッズの贈呈
+                </p>
+            </div>
+
+            <p style="margin-top: 24px;">ご入会をご希望の方は、お問い合わせフォームより「友の会入会希望」と明記の上、ご連絡ください。皆様のご参加を心よりお待ちしております。</p>
+        </div>
+
+        <div class="back-nav">
+            <a href="index.html" class="back-btn">➔ トップページへ戻る</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="footer-copyright">
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
+</div>
+
+</body>
+</html>
