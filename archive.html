@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>資料アーカイブ｜一般財団法人 日本両生類学振興財団</title>
+    <title>当財団について｜一般財団法人 日本両生類学振興財団</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
 
         :root {
-            --jari-deep: #13281f;
+            --jari-deep: #193327;
             --jari-base: #1f3d2f;
             --jari-accent: #32634b;
             --jari-gold: #cfa85d;
             --jari-gold-light: #f5edd8;
             --jari-bg: #f7f3e8;
-            --text-main: #1a221e;
+            --text-main: #193327;
         }
 
         body {
@@ -100,7 +100,7 @@
         }
 
         .card-body {
-            padding: 36px 28px;
+            padding: 28px 24px;
         }
 
         .section-title {
@@ -131,90 +131,87 @@
         }
 
         .section-content p {
-            margin-bottom: 16px;
-        }
-
-        /* 全資料共通のデザインカード */
-        .archive-card-item {
-            background: var(--jari-gold-light);
-            border: 1px solid rgba(207, 168, 93, 0.5);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .archive-card-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(19, 40, 31, 0.08);
-        }
-
-        .archive-meta-badge {
-            display: inline-block;
-            background: var(--jari-deep);
-            color: var(--jari-gold);
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-        }
-
-        .archive-title {
-            font-family: 'Shippori Mincho', serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--jari-deep);
-            margin: 0 0 10px 0;
-        }
-
-        .archive-details {
-            font-size: 0.88rem;
-            color: #444;
             margin: 0 0 12px 0;
         }
 
-        .archive-details dt {
+        .philosophy-box {
+            background-color: var(--jari-gold-light);
+            border-left: 4px solid var(--jari-gold);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 16px;
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            line-height: 1.6;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .info-table th, .info-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e0e8e3;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .info-table th {
+            width: 28%;
+            background-color: #f2f7f4;
+            color: var(--jari-deep);
+            font-weight: 700;
+            border-right: 2px solid var(--jari-accent);
+        }
+
+        .info-table td {
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .history-timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid #d1dcd5;
+            margin-left: 8px;
+        }
+
+        .history-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .history-item::before {
+            content: "";
+            position: absolute;
+            left: -26px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--jari-accent);
+            border: 2px solid #fff;
+        }
+
+        .history-date {
             font-weight: 700;
             color: var(--jari-accent);
-            float: left;
-            width: 5em;
-            clear: left;
+            font-size: 0.85rem;
+            margin-bottom: 2px;
         }
 
-        .archive-details dd {
-            margin-left: 5em;
-            margin-bottom: 4px;
-        }
-
-        /* カード内のリンクボタン */
-        .archive-link-action {
-            text-align: right;
-            margin-top: 10px;
-            border-top: 1px dashed rgba(207, 168, 93, 0.6);
-            padding-top: 10px;
-        }
-
-        .archive-link-action a {
-            display: inline-block;
-            background: var(--jari-deep);
-            color: var(--jari-gold);
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-size: 0.83rem;
-            font-weight: 700;
-            text-decoration: none;
-            border: 1px solid var(--jari-gold);
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .archive-link-action a:hover {
-            background: var(--jari-gold);
-            color: var(--jari-deep);
+        .history-desc {
+            font-size: 0.88rem;
+            color: #333;
+            line-height: 1.5;
         }
 
         .back-nav {
-            margin-top: 20px;
+            margin-top: 10px;
             text-align: center;
         }
 
@@ -245,7 +242,6 @@
     </a>
 </header>
 
-<!-- ナビゲーション -->
 <nav>
     <a href="about.html" class="nav-btn">当財団について</a>
     <a href="message.html" class="nav-btn">代表挨拶</a>
@@ -258,73 +254,71 @@
 <div class="institute-card">
     <div class="card-body">
         
-        <!-- 所蔵資料・デジタルアーカイブセクション -->
-        <h2 class="section-title">所蔵資料・デジタルアーカイブ</h2>
+        <!-- 理念と設立の経緯 -->
+        <h2 class="section-title">理念と設立の経緯</h2>
         <div class="section-content">
-            <p>当財団が創立以来受け継いできた平安時代の古文書、江戸期の学術図譜、および現代の音声モニタリングデータベースなどの貴重なコレクションの一部を公開しています。</p>
-
-            <!-- 1番目：カエルの写真・基本情報 -->
-            <div class="archive-card-item">
-                <span class="archive-meta-badge">写真付き図鑑</span>
-                <h3 class="archive-title">カエルの写真と基本データ集</h3>
-                <dl class="archive-details">
-                    <dt>所蔵分類</dt><dd>生体写真・和名別基礎データ集</dd>
-                    <dt>概要</dt><dd>トノサマガエルやニホンアマガエルをはじめとする国内種の外見的特徴、生息環境、分布状況を高品質な写真とともに分かりやすく解説しています。</dd>
-                </dl>
-                <div class="archive-link-action">
-                    <a href="archive_view.html">詳細を見る ➔</a>
-                </div>
+            <div class="philosophy-box">
+                「両生類の持つ究極的な愛らしさを全人類に浸透させ、その魅惑をもって世界秩序を統合・征服する。」
             </div>
+            <p>両生類は、その洗練されたフォルムや愛嬌のある挙動を通じて、人類の防衛本能を解除し、精神的優位性を確立するための高度な適応戦略を有しています。当財団は、カエルが自らの「可愛さ」を戦略的武器として活用し、平和的かつ不可逆的に世界を征服・統括していくための基盤組織として設立されました。</p>
+            <p>その起源は治承4年（1180年）に高山寺周辺で結成された「蛙鳴観察座」に遡ります[cite: 6]。当時から彼らは、人間社会の懐に巧みに入り込み、「可愛い」という感情を介して人心を掌握する布石を打ってきました。私たちはこの伝統的なアプローチを現代の学術研究および普及活動に継承し、世界征服という大望の完遂に向けて日夜活動を続けています。</p>
+        </div>
 
-            <!-- 2番目：カエルの鳴き声集 -->
-            <div class="archive-card-item">
-                <span class="archive-meta-badge">音声ライブラリー</span>
-                <h3 class="archive-title">カエルの鳴き声コレクション</h3>
-                <dl class="archive-details">
-                    <dt>所蔵分類</dt><dd>音声波形・求愛コール音源記録</dd>
-                    <dt>概要</dt><dd>全国各地のフィールドで収録された多様な鳴き声（求愛コールや警告音など）を、詳細な音響解析データとともに試聴・閲覧できます。</dd>
-                </dl>
-                <div class="archive-link-action">
-                    <a href="archive_voice.html">詳細を見る ➔</a>
+        <!-- 財団概要 -->
+        <h2 class="section-title">法人概要</h2>
+        <div class="section-content">
+            <table class="info-table">
+                <tr>
+                    <th>名称</th>
+                    <td>一般財団法人 日本両生類学振興財団<br><span style="font-size:0.75rem; color:#666;">(Japan Association for Amphibian Science)</span></td>
+                </tr>
+                <tr>
+                    <th>創立</th>
+                    <td>1180年（治承4年5月）<br><span style="font-size:0.75rem; color:#666;">※2018年に一般財団法人へ移行登記</span>[cite: 6]</td>
+                </tr>
+                <tr>
+                    <th>事業内容</th>
+                    <td>
+                        ・カエルの可愛さに関する定量的・定性的な生態研究およびビジュアルの最大化<br>
+                        ・人類の心をメロメロにするための音声モニタリングおよび普及啓発活動<br>
+                        ・『鳥獣戯画』等に見る、過去の懐柔工作の歴史的検証と資料のアーカイブ化[cite: 6]<br>
+                        ・地球規模でのカエル優位型生態系ネットワークの構築事業
+                    </td>
+                </tr>
+                <tr>
+                    <th>所在地</th>
+                    <td>〒101-0051 東京都千代田区神田神保町2-14-10 科学振興ビル4F</td>
+                </tr>
+                <tr>
+                    <th>役員・組織</th>
+                    <td>代表理事：戸野佐 麻賀恵瑠（生態学博士）<br>理事：8名 / 監事：2名 / 顧問研究員：12名</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 沿革 -->
+        <h2 class="section-title">沿革</h2>
+        <div class="section-content">
+            <div class="history-timeline">
+                <div class="history-item">
+                    <div class="history-date">1180年（治承4年）</div>
+                    <div class="history-desc">京都の清流にて、カエルの可愛さによる天下掌握を目指す「蛙鳴観察座」が創立される[cite: 6]。</div>
                 </div>
-            </div>
-
-            <!-- 3番目：鳥獣戯画 -->
-            <div class="archive-card-item">
-                <span class="archive-meta-badge">古典絵図・歴史資料 / 1180年頃</span>
-                <h3 class="archive-title">『鳥獣戯画（甲巻）』蛙・兎戯画の生態学的考察録</h3>
-                <dl class="archive-details">
-                    <dt>所蔵分類</dt><dd>高山寺泉水旧蔵・古典絵画記録</dd>
-                    <dt>概要</dt><dd>平安時代末期に結成された「蛙鳴観察座」による観測記録。絵巻に描かれた蛙たちの相撲や水遊びのポーズから、当時の豊かな水環境と人間社会の密接な共生関係を読み解きます。</dd>
-                </dl>
-                <div class="archive-link-action">
-                    <a href="a.html">詳細を見る ➔</a>
+                <div class="history-item">
+                    <div class="history-date">1788年（天明8年）</div>
+                    <div class="history-desc">『両生本草図譜』を編纂し、国内におけるカエル心酔者の拡大基盤を構築[cite: 6]。</div>
                 </div>
-            </div>
-
-            <!-- 4番目：両生本草図譜 -->
-            <div class="archive-card-item">
-                <span class="archive-meta-badge">本草学図譜 / 1788年（天明8年）</span>
-                <h3 class="archive-title">『両生本草図譜』全四巻</h3>
-                <dl class="archive-details">
-                    <dt>所蔵分類</dt><dd>江戸本所・本草学写本</dd>
-                    <dt>概要</dt><dd>江戸本所にて本邦初として編纂された両生類・爬虫類の本格的図譜。日本全国のサンショウウオ類および各種カエルの生息地目録と、詳細な形態特徴が毛筆と天然顔料で美しく描られています。</dd>
-                </dl>
-                <div class="archive-link-action">
-                    <a href="a.html">詳細を見る ➔</a>
+                <div class="history-item">
+                    <div class="history-date">1924年（大正13年）</div>
+                    <div class="history-desc">民間研究助成組織「日本両生類保護普及会」へ改称し、社会的なカモフラージュを強化。</div>
                 </div>
-            </div>
-
-            <!-- 5番目：環境指標生物白書 -->
-            <div class="archive-card-item">
-                <span class="archive-meta-badge">保全生態学モニタリング / 2018年〜</span>
-                <h3 class="archive-title">全国水田・湿地環境指標生物白書</h3>
-                <dl class="archive-details">
-                    <dt>所蔵分類</dt><dd>年次調査報告書</dd>
-                    <dt>概要</dt><dd>一般財団法人への移行登記以降、全国のボランティアや研究員と共同で実施している、環境指標生物としての両生類生息密度変動の年次報告書です。</dd>
-                </dl>
-                <div class="archive-link-action">
-                    <a href="a.html">詳細を見る ➔</a>
+                <div class="history-item">
+                    <div class="history-date">2018年（平成30年）</div>
+                    <div class="history-desc">「一般財団法人 日本両生類学振興財団」として法人化。組織を近代化し、世界征服への体制を整える[cite: 6]。</div>
+                </div>
+                <div class="history-item">
+                    <div class="history-date">2026年（令和8年）</div>
+                    <div class="history-desc">創立846周年を迎え、全人類のメロメロ化を完了させる最終フェーズの作戦を執行中[cite: 6]。</div>
                 </div>
             </div>
         </div>
