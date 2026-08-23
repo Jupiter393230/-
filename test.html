@@ -124,11 +124,48 @@
             padding: 10px 0;
         }
 
-        #name-screen h2 {
-            font-family: 'Shippori Mincho', serif;
-            font-size: 1.15rem;
+        /* 目立つタイトルバナーの追加スタイリング */
+        .exam-title-banner {
+            background: linear-gradient(135deg, var(--jari-deep) 0%, #1a382b 100%);
+            border: 2px solid var(--jari-gold);
+            outline: 1px solid var(--jari-deep);
+            border-radius: 12px;
+            padding: 16px 14px;
+            margin-bottom: 22px;
+            box-shadow: 0 6px 18px rgba(19, 40, 31, 0.25);
+            position: relative;
+        }
+
+        .exam-title-badge-label {
+            display: inline-block;
+            background: var(--jari-gold);
             color: var(--jari-deep);
-            margin-bottom: 10px;
+            font-size: 0.68rem;
+            font-weight: 900;
+            padding: 2px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.12em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .exam-title-main {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.25rem;
+            color: #ffffff;
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: 0.08em;
+            line-height: 1.4;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #name-screen h3 {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.05rem;
+            color: var(--jari-deep);
+            margin-bottom: 8px;
+            font-weight: 800;
         }
 
         #name-screen p {
@@ -320,7 +357,6 @@
             line-height: 1.5;
         }
 
-        /* ヒント最下部の注意書きスタイル */
         .hint-notice {
             display: block;
             margin-top: 8px;
@@ -381,7 +417,6 @@
             color: #234031;
         }
 
-        /* 解説下の画像表示枠 */
         .explanation-img-box {
             display: none;
             margin-top: 14px;
@@ -480,8 +515,14 @@
 
     <div class="card-body">
         <div id="name-screen">
-            <h2>受験者情報入力</h2>
-            <p>両生類音声識別・生態鑑定能力試験を開始する前に、あなたの名前を入力してください。</p>
+            <!-- 目立つタイトルバナー -->
+            <div class="exam-title-banner">
+                <span class="exam-title-badge-label">OFFICIAL CERTIFICATION EXAM</span>
+                <h2 class="exam-title-main">両生類<br>音声識別・生態鑑定能力試験</h2>
+            </div>
+            
+            <h3>受験者情報入力</h3>
+            <p>試験を開始する前に、あなたのお名前を入力してください。</p>
             <input type="text" id="examinee-name" class="name-input" placeholder="例：山田 太郎">
             <button class="start-exam-btn" onclick="startExam()">試験を開始する ➔</button>
         </div>
@@ -515,7 +556,6 @@
             </div>
 
             <div id="explanation" class="explanation-box"></div>
-            <!-- 生態用：解説の下に表示する画像領域 -->
             <div id="explanation-img-box" class="explanation-img-box">
                 <img id="explanation-img" class="explanation-img" src="" alt="解説画像" onerror="this.parentElement.style.display='none';">
             </div>
@@ -552,7 +592,7 @@
     let answered = false;
     let currentShuffledOptions = [];
     let currentCorrectAnswerText = "";
-    let currentAudio = null; // 再生中のオーディオオブジェクトを保持する変数
+    let currentAudio = null;
 
     function stopCurrentAudio() {
         if (currentAudio) {
@@ -626,7 +666,6 @@
 
     const svgDefaultFallback = `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="35" fill="#32634b" stroke="#13281f" stroke-width="3"/></svg>`;
 
-    // --- 生態 30問 ---
     const ecoPool = [
         {
             id: 'eco_1', genre: '生態', type: 'eco-image',
@@ -870,7 +909,6 @@
         }
     ];
 
-    // --- 見た目 10問 ---
     const viewPool = [
         {
             id: 'view_1', genre: '見た目', type: 'image',
@@ -954,7 +992,6 @@
         }
     ];
 
-    // --- 鳴き声 10問 ---
     const voicePool = [
         {
             id: 'voice_1', genre: '鳴き声', type: 'sound', synthSound: 'amagaeru',
@@ -1038,7 +1075,6 @@
         }
     ];
 
-    // 配列ランダムシャッフル関数
     function shuffleArray(array) {
         let arr = [...array];
         for (let i = arr.length - 1; i > 0; i--) {
@@ -1048,7 +1084,6 @@
         return arr;
     }
 
-    // 問題抽出（生態10 + 見た目5 + 鳴き声5 = 20問）
     function buildExamDataset() {
         const selectedEco = shuffleArray(ecoPool).slice(0, 10);
         const selectedView = shuffleArray(viewPool).slice(0, 5);
@@ -1087,9 +1122,7 @@
     }
 
     function playAudio(qIndex) {
-        // すでに別の音声が再生中なら停止する
         stopCurrentAudio();
-
         const data = selectedQuizList[qIndex];
         const audioSrc = `image/${data.id}.mp3`;
         
@@ -1101,13 +1134,10 @@
     }
 
     function loadQuestion() {
-        // 次の問題を読み込むタイミングで再生中の音声を停止
         stopCurrentAudio();
-
         answered = false;
         const currentData = selectedQuizList[currentQuestionIndex];
 
-        // ジャンル表示
         const badge = document.getElementById('category-badge');
         badge.innerText = `【ジャンル】${currentData.genre}`;
 
@@ -1118,18 +1148,15 @@
         const stage = document.getElementById('stage-box');
         const explanationImgBox = document.getElementById('explanation-img-box');
         
-        // 解説下の画像エリアを初期化非表示
         explanationImgBox.style.display = 'none';
 
         if (currentData.type === 'eco-image') {
-            // 「生態」問題：出題時は上のステージボックスを非表示にする
             stage.style.display = 'none';
         } else {
             stage.style.display = 'flex';
             if (currentData.type === 'sound') {
                 stage.innerHTML = `<button class="sound-btn" onclick="playAudio(${currentQuestionIndex})">🔊 音声標本を再生する</button>`;
             } else {
-                // 「見た目」問題：上のステージボックスに表示
                 const activeImgSrc = `image/${currentData.id}.jpg`;
                 stage.innerHTML = `<img src="${activeImgSrc}" class="quiz-img" alt="標本画像" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` +
                                   `<div style="display:none; width:100%; height:100%; align-items:center; justify-content:center; position:absolute; top:0; left:0;">${svgDefaultFallback}</div>`;
@@ -1143,10 +1170,7 @@
         hintContent.style.display = 'none';
         document.querySelector('.hint-toggle-btn').innerHTML = '🔍 ヒントを閲覧する（折りたたみ） 🔽';
 
-        // 正解の文字列を記録
         currentCorrectAnswerText = currentData.options[currentData.correctAnswerIndex];
-
-        // 設問に設定された4つの選択肢の並び順をランダム化
         currentShuffledOptions = shuffleArray(currentData.options);
 
         const buttons = document.querySelectorAll('.option-btn');
@@ -1164,7 +1188,6 @@
         if (answered) return;
         answered = true;
 
-        // 解答を選んだ際にも再生中の音声を停止する
         stopCurrentAudio();
 
         const currentData = selectedQuizList[currentQuestionIndex];
@@ -1190,7 +1213,6 @@
         document.getElementById('explanation').innerHTML = currentData.explanation;
         document.getElementById('explanation').style.display = 'block';
 
-        // 「生態」問題の場合、解答後に解説の下へ画像を表示
         if (currentData.type === 'eco-image') {
             const expImgBox = document.getElementById('explanation-img-box');
             const expImg = document.getElementById('explanation-img');
