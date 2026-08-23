@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資料アーカイブ｜一般財団法人 日本両生類学振興財団</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+
+        :root {
+            --jari-deep: #13281f;
+            --jari-base: #1f3d2f;
+            --jari-accent: #32634b;
+            --jari-gold: #cfa85d;
+            --jari-gold-light: #f5edd8;
+            --jari-bg: #f7f3e8;
+            --text-main: #1a221e;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background-color: var(--jari-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(207, 168, 93, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(50, 99, 75, 0.06) 0%, transparent 20%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-main);
+            padding: 20px 10px;
+            box-sizing: border-box;
+        }
+
+        header { 
+            background: var(--jari-deep); 
+            color: #fff; 
+            padding: 50px 20px; 
+            text-align: center; 
+            border-bottom: 5px solid var(--jari-gold); 
+            width: 100%;
+            box-sizing: border-box;
+        }
+        header a { color: #fff; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+        header a:hover { opacity: 0.85; }
+        h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
+        .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
+
+        nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 15px 20px; 
+            background: rgba(255, 255, 255, 0.95); 
+            backdrop-filter: blur(5px);
+            flex-wrap: wrap; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid var(--jari-gold);
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+        .nav-btn { 
+            background: var(--jari-deep); 
+            color: var(--jari-gold); 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: 900; 
+            font-size: 1rem; 
+            border: 2px solid var(--jari-gold); 
+            transition: all 0.3s; 
+            text-align: center; 
+        }
+        .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
+
+        .institute-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(19, 40, 31, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+            max-width: 680px;
+            width: 100%;
+            border: 1px solid rgba(207, 168, 93, 0.35);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            color: var(--jari-base);
+            text-align: center;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        .card-body {
+            padding: 36px 28px;
+        }
+
+        .section-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            border-bottom: 2px solid var(--jari-gold);
+            padding-bottom: 6px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::before {
+            content: "■";
+            font-size: 0.8rem;
+            color: var(--jari-accent);
+        }
+
+        .section-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 32px;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        /* 全資料共通のデザインカード */
+        .archive-card-item {
+            background: var(--jari-gold-light);
+            border: 1px solid rgba(207, 168, 93, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .archive-card-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(19, 40, 31, 0.08);
+        }
+
+        .archive-meta-badge {
+            display: inline-block;
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .archive-title {
+            font-family: 'Shippori Mincho', serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--jari-deep);
+            margin: 0 0 10px 0;
+        }
+
+        .archive-details {
+            font-size: 0.88rem;
+            color: #444;
+            margin: 0 0 12px 0;
+        }
+
+        .archive-details dt {
+            font-weight: 700;
+            color: var(--jari-accent);
+            float: left;
+            width: 5em;
+            clear: left;
+        }
+
+        .archive-details dd {
+            margin-left: 5em;
+            margin-bottom: 4px;
+        }
+
+        /* カード内のリンクボタン */
+        .archive-link-action {
+            text-align: right;
+            margin-top: 10px;
+            border-top: 1px dashed rgba(207, 168, 93, 0.6);
+            padding-top: 10px;
+        }
+
+        .archive-link-action a {
+            display: inline-block;
+            background: var(--jari-deep);
+            color: var(--jari-gold);
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 0.83rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid var(--jari-gold);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .archive-link-action a:hover {
+            background: var(--jari-gold);
+            color: var(--jari-deep);
+        }
+
+        .back-nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: var(--jari-deep);
+            color: var(--jari-gold-light);
+            border: 1px solid var(--jari-gold);
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--jari-base);
+        }
+    </style>
+</head>
+<body>
+
+<header id="top">
+    <a href="index.html">
+        <h1>日本両生類学振興財団</h1>
+        <p class="subtitle">JAPAN ASSOCIATION FOR AMPHIBIAN SCIENCE</p>
+    </a>
+</header>
+
+<!-- ナビゲーション -->
+<nav>
+    <a href="about.html" class="nav-btn">当財団について</a>
+    <a href="message.html" class="nav-btn">代表挨拶</a>
+    <a href="archive.html" class="nav-btn">資料アーカイブ</a>
+    <a href="event.html" class="nav-btn">イベント情報</a>
+    <a href="friends.html" class="nav-btn">友の会について</a>
+    <a href="inquiry.html" class="nav-btn">お問い合わせ</a>
+</nav>
+
+<div class="institute-card">
+    <div class="card-body">
+        
+        <!-- 所蔵資料・デジタルアーカイブセクション -->
+        <h2 class="section-title">所蔵資料・デジタルアーカイブ</h2>
+        <div class="section-content">
+            <p>当財団が創立以来受け継いできた平安時代の古文書、江戸期の学術図譜、および現代の音声モニタリングデータベースなどの貴重なコレクションの一部を公開しています。</p>
+
+            <!-- 1番目：カエルの写真・基本情報 -->
+            <div class="archive-card-item">
+                <span class="archive-meta-badge">写真付き図鑑</span>
+                <h3 class="archive-title">カエルの写真と基本データ集</h3>
+                <dl class="archive-details">
+                    <dt>所蔵分類</dt><dd>生体写真・和名別基礎データ集</dd>
+                    <dt>概要</dt><dd>トノサマガエルやニホンアマガエルをはじめとする国内種の外見的特徴、生息環境、分布状況を高品質な写真とともに分かりやすく解説しています。</dd>
+                </dl>
+                <div class="archive-link-action">
+                    <a href="archive_view.html">詳細を見る ➔</a>
+                </div>
+            </div>
+
+            <!-- 2番目：カエルの鳴き声集 -->
+            <div class="archive-card-item">
+                <span class="archive-meta-badge">音声ライブラリー</span>
+                <h3 class="archive-title">カエルの鳴き声コレクション</h3>
+                <dl class="archive-details">
+                    <dt>所蔵分類</dt><dd>音声波形・求愛コール音源記録</dd>
+                    <dt>概要</dt><dd>全国各地のフィールドで収録された多様な鳴き声（求愛コールや警告音など）を、詳細な音響解析データとともに試聴・閲覧できます。</dd>
+                </dl>
+                <div class="archive-link-action">
+                    <a href="archive_voice.html">詳細を見る ➔</a>
+                </div>
+            </div>
+
+            <!-- 3番目：鳥獣戯画 -->
+            <div class="archive-card-item">
+                <span class="archive-meta-badge">古典絵図・歴史資料 / 1180年頃</span>
+                <h3 class="archive-title">『鳥獣戯画（甲巻）』蛙・兎戯画の生態学的考察録</h3>
+                <dl class="archive-details">
+                    <dt>所蔵分類</dt><dd>高山寺泉水旧蔵・古典絵画記録</dd>
+                    <dt>概要</dt><dd>平安時代末期に結成された「蛙鳴観察座」による観測記録。絵巻に描かれた蛙たちの相撲や水遊びのポーズから、当時の豊かな水環境と人間社会の密接な共生関係を読み解きます。</dd>
+                </dl>
+                <div class="archive-link-action">
+                    <a href="a.html">詳細を見る ➔</a>
+                </div>
+            </div>
+
+            <!-- 4番目：両生本草図譜 -->
+            <div class="archive-card-item">
+                <span class="archive-meta-badge">本草学図譜 / 1788年（天明8年）</span>
+                <h3 class="archive-title">『両生本草図譜』全四巻</h3>
+                <dl class="archive-details">
+                    <dt>所蔵分類</dt><dd>江戸本所・本草学写本</dd>
+                    <dt>概要</dt><dd>江戸本所にて本邦初として編纂された両生類・爬虫類の本格的図譜。日本全国のサンショウウオ類および各種カエルの生息地目録と、詳細な形態特徴が毛筆と天然顔料で美しく描られています。</dd>
+                </dl>
+                <div class="archive-link-action">
+                    <a href="a.html">詳細を見る ➔</a>
+                </div>
+            </div>
+
+            <!-- 5番目：環境指標生物白書 -->
+            <div class="archive-card-item">
+                <span class="archive-meta-badge">保全生態学モニタリング / 2018年〜</span>
+                <h3 class="archive-title">全国水田・湿地環境指標生物白書</h3>
+                <dl class="archive-details">
+                    <dt>所蔵分類</dt><dd>年次調査報告書</dd>
+                    <dt>概要</dt><dd>一般財団法人への移行登記以降、全国のボランティアや研究員と共同で実施している、環境指標生物としての両生類生息密度変動の年次報告書です。</dd>
+                </dl>
+                <div class="archive-link-action">
+                    <a href="a.html">詳細を見る ➔</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-nav">
+            <a href="index.html" class="back-btn">➔ トップページへ戻る</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="footer-copyright">
+    &copy; Japan Association for Amphibian Science. All Rights Reserved.
+</div>
+
+</body>
+</html>
