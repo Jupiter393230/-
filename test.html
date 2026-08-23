@@ -523,7 +523,7 @@
             
             <h3>受験者情報入力</h3>
             <p>試験を開始する前に、あなたのお名前を入力してください。</p>
-            <input type="text" id="examinee-name" class="name-input" placeholder="例：山田 太郎">
+            <input type="text" id="examinee-name" class="name-input" placeholder="例：カエル 太郎">
             <button class="start-exam-btn" onclick="startExam()">試験を開始する ➔</button>
         </div>
 
@@ -544,7 +544,7 @@
             <h2 class="question-text" id="question">設問を読み込み中...</h2>
 
             <div class="hint-accordion">
-                <button class="hint-toggle-btn" onclick="toggleHint()">🔍 ヒントを閲覧する（折りたたみ） 🔽</button>
+                <button class="hint-toggle-btn" onclick="toggleHint()">🔍 ヒントを閲覧する 🔽</button>
                 <div class="hint-content" id="hint-content"></div>
             </div>
 
@@ -1114,7 +1114,7 @@
         const btn = document.querySelector('.hint-toggle-btn');
         if (content.style.display === 'block') {
             content.style.display = 'none';
-            btn.innerHTML = '🔍 ヒントを閲覧する（折りたたみ） 🔽';
+            btn.innerHTML = '🔍 ヒントを閲覧する 🔽';
         } else {
             content.style.display = 'block';
             btn.innerHTML = '🔍 ヒントを閉じる 🔼';
@@ -1168,7 +1168,7 @@
         const hintContent = document.getElementById('hint-content');
         hintContent.innerHTML = `${currentData.hint}<span class="hint-notice">ヒントの閲覧履歴は記録しています。</span>`;
         hintContent.style.display = 'none';
-        document.querySelector('.hint-toggle-btn').innerHTML = '🔍 ヒントを閲覧する（折りたたみ） 🔽';
+        document.querySelector('.hint-toggle-btn').innerHTML = '🔍 ヒントを閲覧する 🔽';
 
         currentCorrectAnswerText = currentData.options[currentData.correctAnswerIndex];
         currentShuffledOptions = shuffleArray(currentData.options);
