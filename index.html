@@ -36,6 +36,7 @@
             z-index: 1000; 
             box-shadow: 0 4px 10px rgba(31, 61, 47, 0.15); 
             border-bottom: 2px solid var(--jari-gold);
+            box-sizing: border-box;
         }
         .nav-btn { 
             background: var(--jari-deep); 
@@ -49,24 +50,28 @@
             transition: all 0.3s; 
             text-align: center; 
             white-space: nowrap;
+            box-sizing: border-box;
         }
         .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
 
-        /* ★ スマホ向けレスポンシブ対応 ★ */
+        /* ★ スマホ向けレスポンシブ対応（横スライド廃止 ➔ 3列×2行レイアウト） ★ */
         @media (max-width: 768px) {
             nav {
                 position: relative; /* 固定解除で画面圧迫を防止 */
-                justify-content: flex-start;
-                flex-wrap: nowrap;
-                overflow-x: auto; /* 横スクロール対応 */
-                -webkit-overflow-scrolling: touch;
-                padding: 12px 15px;
-                gap: 10px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); /* 3列等分割 */
+                gap: 8px 6px; /* ボタン同士の間隔 (上下 左右) */
+                padding: 10px;
             }
             .nav-btn {
-                padding: 8px 16px;
-                font-size: 0.85rem;
-                flex-shrink: 0; /* 折り返し防止 */
+                padding: 8px 2px;
+                font-size: 0.78rem;
+                letter-spacing: -0.02em; /* 文字溢れ防止 */
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                white-space: normal; /* 折り返しを許可 */
             }
         }
 
