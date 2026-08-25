@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1024">
     <title>両生類基本情報データベース｜一般財団法人 日本両生類学振興財団</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
@@ -46,7 +46,7 @@
         h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
         .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
 
-        /* 上部固定ナビゲーション（PC用基本スタイル） */
+        /* 上部固定ナビゲーション（PC版表示に一本化） */
         nav { 
             display: flex; 
             justify-content: center; 
@@ -77,37 +77,6 @@
             box-sizing: border-box;
         }
         .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
-
-        /* ★ ナビゲーションのスマホ版デザインのみを残す設定 ★ */
-        @media (max-width: 768px) {
-            nav {
-                position: sticky; /* スクロール追従固定 */
-                top: 0;
-                display: grid;
-                grid-template-columns: repeat(3, 1fr); /* 3列ぴったり均等割 */
-                gap: 0; /* 隙間を完全ゼロに */
-                padding: 0;
-                background: var(--jari-deep);
-                border-bottom: 2px solid var(--jari-gold);
-            }
-            .nav-btn {
-                padding: 10px 2px;
-                font-size: 0.75rem;
-                letter-spacing: -0.03em;
-                width: 100%;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                white-space: normal;
-                border-radius: 0; /* 四角くして密着させる */
-                border: 1px solid rgba(207, 168, 93, 0.4); /* ボタン間の仕切り線 */
-                margin: 0;
-            }
-            .nav-btn:hover {
-                transform: none; /* スマホ固定時は浮き上がりアニメーションをオフ */
-            }
-        }
 
         .main-container {
             flex: 1;
@@ -308,7 +277,7 @@
 
         .frog-img-wrapper {
             width: 100%;
-            height: 480px; /* 縦幅を伸ばして縦横比を縦長に変更（旧: 320px） */
+            height: 480px;
             background-color: var(--jari-base);
             border: 2px solid var(--jari-gold);
             border-radius: 8px;
