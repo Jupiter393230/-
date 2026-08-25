@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1024">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>両生類基本情報データベース｜一般財団法人 日本両生類学振興財団</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
@@ -46,7 +46,7 @@
         h1 { font-family: 'Shippori Mincho', serif; margin: 0; font-size: 1.8rem; }
         .subtitle { color: var(--jari-gold); font-size: 0.85rem; letter-spacing: 0.25em; margin-top: 10px; }
 
-        /* 上部固定ナビゲーション（PC版表示に一本化） */
+        /* 上部固定ナビゲーション（PC用基本スタイル） */
         nav { 
             display: flex; 
             justify-content: center; 
@@ -78,20 +78,51 @@
         }
         .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
 
+        /* ★ スマホ向けレスポンシブ対応（event.htmlと共通） ★ */
+        @media (max-width: 768px) {
+            nav {
+                position: sticky; /* スクロール追従固定 */
+                top: 0;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); /* 3列ぴったり均等割 */
+                gap: 0; /* 隙間を完全ゼロに */
+                padding: 0;
+                background: var(--jari-deep);
+                border-bottom: 2px solid var(--jari-gold);
+            }
+            .nav-btn {
+                padding: 10px 2px;
+                font-size: 0.75rem;
+                letter-spacing: -0.03em;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                white-space: normal;
+                border-radius: 0; /* 四角くして密着させる */
+                border: 1px solid rgba(207, 168, 93, 0.4); /* ボタン間の仕切り線 */
+                margin: 0;
+            }
+            .nav-btn:hover {
+                transform: none; /* スマホ固定時は浮き上がりアニメーションをオフ */
+            }
+        }
+
         .main-container {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 40px 15px;
+            padding: 20px 10px;
             box-sizing: border-box;
             width: 100%;
         }
 
         .institute-card {
             background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 16px 48px rgba(19, 40, 31, 0.15), 0 2px 6px rgba(0,0,0,0.04);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(19, 40, 31, 0.1);
             max-width: 900px;
             width: 100%;
             border: 1px solid rgba(207, 168, 93, 0.35);
@@ -100,84 +131,75 @@
         }
 
         .card-body {
-            padding: 36px 28px;
+            padding: 20px 15px;
         }
 
         .section-title {
             font-family: 'Shippori Mincho', serif;
-            font-size: 1.45rem;
+            font-size: 1.05rem;
             font-weight: 800;
             color: var(--jari-deep);
             border-bottom: 2px solid var(--jari-gold);
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             margin-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .section-title::before {
             content: "■";
-            font-size: 0.8rem;
+            font-size: 0.65rem;
             color: var(--jari-accent);
         }
 
         .intro-container {
             background: linear-gradient(180deg, #fdfbf7 0%, #f7f2e6 100%);
             border: 1px solid rgba(207, 168, 93, 0.35);
-            border-radius: 16px;
-            padding: 28px 24px;
-            margin-bottom: 40px;
-            box-shadow: inset 0 1px 3px rgba(255,255,255,0.8);
+            border-radius: 12px;
+            padding: 14px 10px;
+            margin-bottom: 20px;
         }
 
         .intro-lead {
-            font-size: 0.95rem;
-            line-height: 1.85;
+            font-size: 0.78rem;
+            line-height: 1.65;
             color: var(--jari-deep);
             margin-top: 0;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
             border-bottom: 1px dashed rgba(207, 168, 93, 0.5);
         }
 
         .intro-list {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 12px;
         }
 
         .intro-item {
             display: flex;
             align-items: flex-start;
-            gap: 18px;
+            gap: 10px;
             background: #ffffff;
             border: 1px solid rgba(207, 168, 93, 0.25);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(25, 51, 39, 0.03);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .intro-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 6px 16px rgba(25, 51, 39, 0.07);
-            border-color: var(--jari-gold);
+            border-radius: 8px;
+            padding: 12px 10px;
+            box-shadow: 0 2px 6px rgba(25, 51, 39, 0.03);
         }
 
         .intro-num {
             font-family: 'Shippori Mincho', serif;
-            font-size: 1.6rem;
+            font-size: 1.05rem;
             font-weight: 800;
             color: var(--jari-gold);
             line-height: 1;
             background: var(--jari-deep);
-            padding: 10px 14px;
-            border-radius: 8px;
-            min-width: 32px;
+            padding: 6px 8px;
+            border-radius: 6px;
+            min-width: 20px;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
         .intro-content {
@@ -185,18 +207,17 @@
         }
 
         .intro-content h3 {
-            margin: 0 0 8px 0;
-            font-size: 1.1rem;
+            margin: 0 0 4px 0;
+            font-size: 0.88rem;
             color: var(--jari-deep);
             font-family: 'Shippori Mincho', serif;
             font-weight: 800;
-            letter-spacing: 0.02em;
         }
 
         .intro-content p {
             margin: 0;
-            font-size: 0.9rem;
-            line-height: 1.8;
+            font-size: 0.75rem;
+            line-height: 1.55;
             color: #444;
         }
 
@@ -204,83 +225,76 @@
         .frog-list {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 18px;
         }
 
         .frog-card {
             background: var(--jari-gold-light);
             border: 1px solid rgba(207, 168, 93, 0.5);
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(19, 40, 31, 0.05);
-            transition: transform 0.2s;
-        }
-
-        .frog-card:hover {
-            transform: translateY(-2px);
+            border-radius: 10px;
+            padding: 14px 10px;
         }
 
         .frog-header {
             display: flex;
-            align-items: baseline;
+            align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid rgba(207, 168, 93, 0.4);
-            padding-bottom: 8px;
-            margin-bottom: 16px;
+            padding-bottom: 6px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .frog-title-group {
             display: flex;
             align-items: baseline;
-            gap: 10px;
+            gap: 6px;
             flex-wrap: wrap;
         }
 
         .frog-name {
             font-family: 'Shippori Mincho', serif;
-            font-size: 1.35rem;
+            font-size: 1.0rem;
             font-weight: 800;
             color: var(--jari-deep);
             margin: 0;
         }
 
         .frog-scientific {
-            font-size: 0.9rem;
+            font-size: 0.7rem;
             font-style: italic;
             color: #555;
-            font-weight: 500;
         }
 
         .frog-badge {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             font-weight: 700;
             background: var(--jari-deep);
             color: var(--jari-gold);
-            padding: 4px 10px;
+            padding: 2px 5px;
             border-radius: 4px;
         }
 
         .frog-content {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 12px;
         }
 
         .frog-media {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .frog-img-wrapper {
             width: 100%;
-            height: 480px;
+            height: 200px;
             background-color: var(--jari-base);
-            border: 2px solid var(--jari-gold);
-            border-radius: 8px;
+            border: 1px solid var(--jari-gold);
+            border-radius: 6px;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -295,27 +309,23 @@
 
         .frog-audio-box {
             background: #fff;
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 6px 8px;
+            border-radius: 6px;
             border: 1px solid rgba(207, 168, 93, 0.4);
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 4px;
         }
 
         .frog-audio-title {
-            font-size: 0.85rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--jari-accent);
-            white-space: nowrap;
         }
 
         .frog-audio-box audio {
-            height: 36px;
-            flex: 1;
-            min-width: 200px;
+            height: 30px;
+            width: 100%;
         }
 
         .frog-info {
@@ -325,19 +335,18 @@
         .frog-info-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.88rem;
+            font-size: 0.75rem;
         }
 
         .frog-info-table th, .frog-info-table td {
-            padding: 9px 12px;
+            padding: 6px 4px;
             border-bottom: 1px solid rgba(207, 168, 93, 0.3);
             text-align: left;
             vertical-align: top;
         }
 
         .frog-info-table th {
-            width: 18%;
-            min-width: 75px;
+            width: 25%;
             color: var(--jari-deep);
             font-weight: 700;
             background: rgba(255, 255, 255, 0.5);
@@ -346,38 +355,117 @@
 
         .frog-info-table td {
             color: #222;
-            line-height: 1.7;
+            line-height: 1.45;
         }
 
         .back-nav {
-            margin-top: 35px;
+            margin-top: 20px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .back-btn {
-            display: inline-block;
-            padding: 10px 24px;
+            display: block;
+            padding: 8px 14px;
             background: var(--jari-deep);
             color: var(--jari-gold-light);
             border: 1px solid var(--jari-gold);
             border-radius: 50px;
-            font-size: 0.88rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .back-btn:hover {
-            background: var(--jari-base);
         }
 
         .footer-copyright {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--jari-base);
             text-align: center;
-            letter-spacing: 0.05em;
-            font-weight: 700;
             padding: 20px 0;
+        }
+
+        /* PC表示用メディアクエリ (画面幅769px以上で元デザイン適用) */
+        @media (min-width: 769px) {
+            header {
+                padding: 50px 20px;
+                border-bottom: 5px solid var(--jari-gold);
+            }
+            .subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 0.25em;
+            }
+            nav {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+                padding: 15px 20px;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(5px);
+            }
+            .nav-btn {
+                background: var(--jari-deep);
+                color: var(--jari-gold);
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 1rem;
+                border: 2px solid var(--jari-gold);
+            }
+            .main-container {
+                padding: 40px 15px;
+            }
+            .card-body {
+                padding: 36px 28px;
+            }
+            .section-title {
+                font-size: 1.25rem;
+            }
+            .intro-container {
+                padding: 24px 20px;
+            }
+            .intro-lead {
+                font-size: 0.85rem;
+            }
+            .intro-num {
+                font-size: 1.4rem;
+                padding: 8px 12px;
+            }
+            .intro-content h3 {
+                font-size: 0.98rem;
+            }
+            .intro-content p {
+                font-size: 0.8rem;
+            }
+            .frog-card {
+                padding: 20px;
+            }
+            .frog-name {
+                font-size: 1.2rem;
+            }
+            .frog-img-wrapper {
+                height: 480px;
+            }
+            .frog-audio-box {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .frog-audio-box audio {
+                width: auto;
+            }
+            .frog-info-table {
+                font-size: 0.78rem;
+            }
+            .frog-info-table th {
+                width: 18%;
+            }
+            .back-nav {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .back-btn {
+                display: inline-block;
+            }
         }
     </style>
 </head>
@@ -445,7 +533,7 @@
             </div>
 
             <h2 class="section-title">国内に分布する主要なカエル図鑑（生息地・写真・鳴き声・生態）</h2>
-            <p style="font-size:0.88rem; color:#555; margin-bottom:20px;">日本国内で観察される主要なカエルの各種データ、生息地域、観察ポイントおよび鳴き声音声アーカイブです。</p>
+            <p style="font-size:0.75rem; color:#555; margin-bottom:14px;">日本国内で観察される主要なカエルの各種データ、生息地域、観察ポイントおよび鳴き声音声アーカイブです。</p>
 
             <div class="frog-list">
 
@@ -461,7 +549,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/amagaeru.jpg" alt="ニホンアマガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/amagaeru.jpg" alt="ニホンアマガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -491,7 +579,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/schlegel.jpg" alt="シュレーゲルアオガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/schlegel.jpg" alt="シュレーゲルアオガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -521,7 +609,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/moriao.jpg" alt="モリアオガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/moriao.jpg" alt="モリアオガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -551,7 +639,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/tonosama.jpg" alt="トノサマガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/tonosama.jpg" alt="トノサマガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -581,7 +669,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/hikigaeru.jpg" alt="ニホンヒキガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/hikigaeru.jpg" alt="ニホンヒキガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -611,7 +699,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/tsuchigaeru.jpg" alt="ツチガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/tsuchigaeru.jpg" alt="ツチガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -641,7 +729,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/numagaeru.jpg" alt="ヌマガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/numagaeru.jpg" alt="ヌマガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -671,7 +759,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/akagaeru.jpg" alt="ニホンアカガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/akagaeru.jpg" alt="ニホンアカガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -701,7 +789,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/kajika.jpg" alt="カジカガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/kajika.jpg" alt="カジカガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -731,7 +819,7 @@
                     <div class="frog-content">
                         <div class="frog-media">
                             <div class="frog-img-wrapper">
-                                <img src="image/ushigaeru.jpg" alt="ウシガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.8rem;padding:10px;text-align:center;\'>画像準備中</span>';">
+                                <img src="image/ushigaeru.jpg" alt="ウシガエル" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#fff;font-size:0.75rem;padding:10px;text-align:center;\'>画像準備中</span>';">
                             </div>
                             <div class="frog-audio-box">
                                 <div class="frog-audio-title">🔊 鳴き声音声（再生）</div>
@@ -753,7 +841,7 @@
 
             <div class="back-nav">
                 <a href="archive.html" class="back-btn">➔ 資料アーカイブへ戻る</a>
-                <a href="index.html" class="back-btn" style="margin-left: 10px;">➔ トップページへ戻る</a>
+                <a href="index.html" class="back-btn">➔ トップページへ戻る</a>
             </div>
 
         </div>
