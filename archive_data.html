@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- スマホでもPCと同じ見え方（横幅1024px固定）にする設定 -->
+    <meta name="viewport" content="width=1024">
     <title>両生類基本情報データベース｜一般財団法人 日本両生類学振興財団</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
@@ -78,7 +79,7 @@
         }
         .nav-btn:hover { background: var(--jari-gold); color: var(--jari-deep); transform: translateY(-2px); }
 
-        /* ★ スマホ向けレスポンシブ対応（隙間なし・画面上部完全固定） ★ */
+        /* ★ スマホ向けナビゲーションボタン設定（ナビゲーションのみスマホ用レイアウトを適用） ★ */
         @media (max-width: 768px) {
             nav {
                 position: sticky; /* スクロール追従固定 */
@@ -308,7 +309,7 @@
 
         .frog-img-wrapper {
             width: 100%;
-            height: 480px; /* 縦幅を伸ばして縦横比を縦長に変更（旧: 320px） */
+            height: 480px;
             background-color: var(--jari-base);
             border: 2px solid var(--jari-gold);
             border-radius: 8px;
@@ -409,26 +410,6 @@
             letter-spacing: 0.05em;
             font-weight: 700;
             padding: 20px 0;
-        }
-
-        @media (max-width: 650px) {
-            .frog-img-wrapper {
-                height: 320px; /* モバイル表示時の画像エリア高さ調整 */
-            }
-            .frog-audio-box {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .frog-audio-box audio {
-                width: 100%;
-            }
-            .intro-item {
-                flex-direction: column;
-                gap: 12px;
-            }
-            .intro-num {
-                align-self: flex-start;
-            }
         }
     </style>
 </head>
